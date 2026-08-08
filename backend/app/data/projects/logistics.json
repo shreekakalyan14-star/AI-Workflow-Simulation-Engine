@@ -1,0 +1,232 @@
+[
+    {
+        "id": "log_001",
+        "title": "Last-Mile Delivery Routing System",
+        "industry": "Logistics",
+        "client_name": "SpeedyDeliver",
+        "description": "An optimization engine and driver app for planning the most efficient delivery routes for a fleet of vehicles.",
+        "difficulty": "Hard",
+        "recommended_roles": [
+            "Backend Developer",
+            "Data Scientist",
+            "Mobile Developer"
+        ],
+        "technology_stack": [
+            "Python",
+            "FastAPI",
+            "React Native",
+            "Google OR-Tools",
+            "PostgreSQL"
+        ],
+        "duration_weeks": 9,
+        "modules": [
+            {
+                "name": "Route Optimization Engine",
+                "description": "Solving the Vehicle Routing Problem (VRP) considering time windows and vehicle capacities."
+            },
+            {
+                "name": "Driver Mobile App",
+                "description": "Turn-by-turn navigation and proof-of-delivery (signature/photo) capture."
+            },
+            {
+                "name": "Dispatcher Dashboard",
+                "description": "Live map view tracking all vehicles and delivery statuses in real-time."
+            },
+            {
+                "name": "Customer Tracking Link",
+                "description": "SMS link for customers to track their package live on a map."
+            }
+        ],
+        "learning_outcomes": [
+            "Algorithm optimization (VRP/TSP)",
+            "Geospatial data tracking",
+            "Building dispatcher interfaces"
+        ],
+        "project_objectives": [
+            "Reduce fleet mileage by 15%",
+            "Provide accurate ETA predictions within a 15-minute window"
+        ]
+    },
+    {
+        "id": "log_002",
+        "title": "Warehouse Management System (WMS)",
+        "industry": "Logistics",
+        "client_name": "GlobalStore Logistics",
+        "description": "A comprehensive system to manage warehouse operations, including receiving, putaway, picking, packing, and shipping.",
+        "difficulty": "Hard",
+        "recommended_roles": [
+            "Backend Developer",
+            "System Architect"
+        ],
+        "technology_stack": [
+            "Java",
+            "Spring Boot",
+            "Angular",
+            "MySQL"
+        ],
+        "duration_weeks": 10,
+        "modules": [
+            {
+                "name": "Inventory Bin Tracking",
+                "description": "Tracking exact 3D locations (aisle, rack, shelf) of every item."
+            },
+            {
+                "name": "Barcode Scanning Integration",
+                "description": "API endpoints optimized for rugged handheld scanners used by warehouse staff."
+            },
+            {
+                "name": "Pick Wave Generation",
+                "description": "Grouping orders efficiently to minimize walking distance for pickers."
+            },
+            {
+                "name": "Shipping Carrier Integration",
+                "description": "Generating shipping labels via APIs from FedEx, UPS, and USPS."
+            }
+        ],
+        "learning_outcomes": [
+            "Complex physical inventory tracking",
+            "Optimizing physical workflows through software",
+            "Integrating with legacy hardware/scanners"
+        ],
+        "project_objectives": [
+            "Increase warehouse picking efficiency by 25%",
+            "Maintain 99.9% inventory accuracy"
+        ]
+    },
+    {
+        "id": "log_003",
+        "title": "Freight Forwarding Portal",
+        "industry": "Logistics",
+        "client_name": "OceanAir Freight",
+        "description": "A platform for managing international shipping logistics, customs documentation, and sea/air freight tracking.",
+        "difficulty": "Medium",
+        "recommended_roles": [
+            "Full Stack Developer",
+            "Backend Developer"
+        ],
+        "technology_stack": [
+            "Node.js",
+            "React",
+            "PostgreSQL"
+        ],
+        "duration_weeks": 7,
+        "modules": [
+            {
+                "name": "Quoting Engine",
+                "description": "Generating freight quotes based on volume, weight, and routes."
+            },
+            {
+                "name": "Document Management",
+                "description": "Generating and storing Bills of Lading, Commercial Invoices, and Customs forms."
+            },
+            {
+                "name": "Vessel Tracking",
+                "description": "Integrating with AIS data providers to track container ships on oceans."
+            },
+            {
+                "name": "Milestone Alerts",
+                "description": "Notifying clients when cargo departs, arrives at port, and clears customs."
+            }
+        ],
+        "learning_outcomes": [
+            "Digitalizing complex paper workflows",
+            "Integrating with maritime APIs",
+            "Business process automation"
+        ],
+        "project_objectives": [
+            "Centralize all shipment documentation securely",
+            "Automate status updates to clients"
+        ]
+    },
+    {
+        "id": "log_004",
+        "title": "Cold Chain Monitoring System",
+        "industry": "Logistics",
+        "client_name": "PharmaTrans",
+        "description": "An IoT-based system to monitor temperature and humidity of sensitive cargo (like vaccines) in transit.",
+        "difficulty": "Medium",
+        "recommended_roles": [
+            "Backend Developer",
+            "IoT Engineer"
+        ],
+        "technology_stack": [
+            "Go",
+            "InfluxDB",
+            "Grafana",
+            "MQTT"
+        ],
+        "duration_weeks": 6,
+        "modules": [
+            {
+                "name": "IoT Telemetry Ingestion",
+                "description": "Handling high-frequency MQTT data streams from sensors in refrigerated trucks."
+            },
+            {
+                "name": "Alerting Engine",
+                "description": "Triggering SMS/Emails instantly if temperature deviates from the safe range."
+            },
+            {
+                "name": "Compliance Reporting",
+                "description": "Generating unalterable temperature logs required by FDA/health authorities."
+            },
+            {
+                "name": "Fleet Analytics",
+                "description": "Dashboards to identify trucks with failing refrigeration units over time."
+            }
+        ],
+        "learning_outcomes": [
+            "Time-series databases (InfluxDB)",
+            "IoT protocols (MQTT)",
+            "Real-time alerting systems"
+        ],
+        "project_objectives": [
+            "Process thousands of sensor readings per second",
+            "Ensure zero data loss for compliance records"
+        ]
+    },
+    {
+        "id": "log_005",
+        "title": "On-Demand Courier App",
+        "industry": "Logistics",
+        "client_name": "CitySprint",
+        "description": "A platform connecting local businesses with independent bike and car couriers for same-day urban deliveries.",
+        "difficulty": "Medium",
+        "recommended_roles": [
+            "Mobile Developer",
+            "Backend Developer"
+        ],
+        "technology_stack": [
+            "React Native",
+            "Firebase",
+            "Node.js"
+        ],
+        "duration_weeks": 7,
+        "modules": [
+            {
+                "name": "Order Creation API",
+                "description": "Allowing local restaurants/shops to push delivery requests directly from their POS."
+            },
+            {
+                "name": "Courier Bidding/Assignment",
+                "description": "Broadcasting available jobs to nearby couriers to accept."
+            },
+            {
+                "name": "Earnings Tracker",
+                "description": "Tracking completed jobs and calculating weekly payouts for couriers."
+            },
+            {
+                "name": "Live Support Chat",
+                "description": "Connecting couriers, merchants, and customers in a 3-way chat."
+            }
+        ],
+        "learning_outcomes": [
+            "Building multi-sided marketplaces",
+            "Real-time job broadcasting",
+            "API integrations for POS systems"
+        ],
+        "project_objectives": [
+            "Assign couriers to jobs within 2 minutes",
+            "Ensure smooth communication during deliveries"
+        ]
+    }
+]

@@ -1,0 +1,233 @@
+[
+    {
+        "id": "ent_001",
+        "title": "Enterprise Resource Planning (ERP)",
+        "industry": "Enterprise",
+        "client_name": "ManufacturePro Inc",
+        "description": "A comprehensive ERP suite integrating manufacturing, supply chain, finance, and human resources for a large corporation.",
+        "difficulty": "Hard",
+        "recommended_roles": [
+            "Backend Developer",
+            "Database Administrator",
+            "System Architect"
+        ],
+        "technology_stack": [
+            "Java",
+            "Spring Boot",
+            "Angular",
+            "PostgreSQL"
+        ],
+        "duration_weeks": 12,
+        "modules": [
+            {
+                "name": "Supply Chain Management",
+                "description": "Tracking raw materials from suppliers to factory floors."
+            },
+            {
+                "name": "Manufacturing Execution",
+                "description": "Managing production orders, machine schedules, and QA checkpoints."
+            },
+            {
+                "name": "Financial Accounting",
+                "description": "General ledger, accounts payable/receivable, and automated tax reporting."
+            },
+            {
+                "name": "HR & Payroll",
+                "description": "Employee lifecycles, benefits administration, and complex payroll runs."
+            }
+        ],
+        "learning_outcomes": [
+            "Building massive modular systems",
+            "Complex data migrations",
+            "Enterprise security and auditing"
+        ],
+        "project_objectives": [
+            "Unify 4 disparate legacy systems into one platform",
+            "Generate financial closing reports 80% faster"
+        ]
+    },
+    {
+        "id": "ent_002",
+        "title": "Customer Relationship Management (CRM)",
+        "industry": "Enterprise",
+        "client_name": "SalesForce Analytics",
+        "description": "A highly customizable CRM platform for sales teams to track leads, manage pipelines, and forecast revenue.",
+        "difficulty": "Medium",
+        "recommended_roles": [
+            "Full Stack Developer",
+            "Backend Developer"
+        ],
+        "technology_stack": [
+            "Python",
+            "FastAPI",
+            "React",
+            "MongoDB",
+            "Elasticsearch"
+        ],
+        "duration_weeks": 8,
+        "modules": [
+            {
+                "name": "Lead & Pipeline Management",
+                "description": "Customizable Kanban boards for tracking sales opportunities."
+            },
+            {
+                "name": "Email Integration",
+                "description": "Syncing with Gmail/Outlook to track email correspondence with clients."
+            },
+            {
+                "name": "Custom Fields & Workflows",
+                "description": "Allowing admins to define custom data models and automation rules."
+            },
+            {
+                "name": "Reporting Dashboard",
+                "description": "Drag-and-drop report builder using Elasticsearch for fast querying."
+            }
+        ],
+        "learning_outcomes": [
+            "Implementing dynamic data schemas",
+            "Building complex search queries",
+            "Third-party email API integration"
+        ],
+        "project_objectives": [
+            "Support millions of customer records with fast search",
+            "Allow non-technical users to build custom workflows"
+        ]
+    },
+    {
+        "id": "ent_003",
+        "title": "IT Service Management (ITSM) Helpdesk",
+        "industry": "Enterprise",
+        "client_name": "TechCorp Global",
+        "description": "An internal ticketing system for IT departments to handle employee issues, asset management, and change requests.",
+        "difficulty": "Medium",
+        "recommended_roles": [
+            "Backend Developer",
+            "Frontend Developer"
+        ],
+        "technology_stack": [
+            "Ruby on Rails",
+            "Vue.js",
+            "PostgreSQL"
+        ],
+        "duration_weeks": 6,
+        "modules": [
+            {
+                "name": "Ticketing System",
+                "description": "Creating, assigning, and tracking support tickets with SLA timers."
+            },
+            {
+                "name": "Asset Management (CMDB)",
+                "description": "Database of all company laptops, servers, and software licenses."
+            },
+            {
+                "name": "Knowledge Base",
+                "description": "Searchable wiki for employees to find self-help articles."
+            },
+            {
+                "name": "Change Management",
+                "description": "Approval workflows for major infrastructure changes."
+            }
+        ],
+        "learning_outcomes": [
+            "Implementing SLA logic",
+            "Building relational tracking systems",
+            "Creating robust APIs for integrations"
+        ],
+        "project_objectives": [
+            "Reduce average ticket resolution time by 30%",
+            "Ensure 100% compliance with change approval processes"
+        ]
+    },
+    {
+        "id": "ent_004",
+        "title": "Document Management System (DMS)",
+        "industry": "Enterprise",
+        "client_name": "LegalFirm Partners",
+        "description": "A secure system for storing, versioning, and collaborating on corporate documents with strict access controls and audit trails.",
+        "difficulty": "Medium",
+        "recommended_roles": [
+            "Backend Developer",
+            "Security Engineer"
+        ],
+        "technology_stack": [
+            "FastAPI",
+            "React",
+            "PostgreSQL",
+            "AWS S3"
+        ],
+        "duration_weeks": 7,
+        "modules": [
+            {
+                "name": "Version Control",
+                "description": "Tracking document history and allowing rollbacks to previous versions."
+            },
+            {
+                "name": "Granular Permissions",
+                "description": "Defining access down to the individual document and user level."
+            },
+            {
+                "name": "Full-text Search",
+                "description": "Indexing document contents for rapid retrieval."
+            },
+            {
+                "name": "Audit Logging",
+                "description": "Immutable log of who viewed, edited, or downloaded every file."
+            }
+        ],
+        "learning_outcomes": [
+            "Implementing robust authorization models",
+            "Building version control logic",
+            "Handling secure file uploads/downloads"
+        ],
+        "project_objectives": [
+            "Ensure compliance with legal data retention policies",
+            "Provide instant search across millions of documents"
+        ]
+    },
+    {
+        "id": "ent_005",
+        "title": "Employee Intranet & Collaboration Portal",
+        "industry": "Enterprise",
+        "client_name": "MegaCorp",
+        "description": "A central hub for company news, employee directories, internal social networking, and resource sharing.",
+        "difficulty": "Easy",
+        "recommended_roles": [
+            "Full Stack Developer",
+            "Frontend Developer"
+        ],
+        "technology_stack": [
+            "Node.js",
+            "React",
+            "MongoDB",
+            "Redis"
+        ],
+        "duration_weeks": 5,
+        "modules": [
+            {
+                "name": "News Feed",
+                "description": "Algorithmic feed of company announcements and departmental updates."
+            },
+            {
+                "name": "Employee Directory",
+                "description": "Searchable org chart with rich employee profiles."
+            },
+            {
+                "name": "Workspaces",
+                "description": "Project-specific groups for team communication and file sharing."
+            },
+            {
+                "name": "Internal Events",
+                "description": "Calendar and RSVP system for corporate events and webinars."
+            }
+        ],
+        "learning_outcomes": [
+            "Building social features",
+            "Implementing search and filtering",
+            "Handling rich text and media content"
+        ],
+        "project_objectives": [
+            "Increase employee engagement metrics by 25%",
+            "Provide a unified platform replacing 3 legacy tools"
+        ]
+    }
+]

@@ -1,0 +1,233 @@
+[
+    {
+        "id": "sm_001",
+        "title": "Professional Networking App",
+        "industry": "Social Media",
+        "client_name": "ProConnect",
+        "description": "A LinkedIn-style platform focusing on specific niche industries. Users can create profiles, connect, and post updates.",
+        "difficulty": "Medium",
+        "recommended_roles": [
+            "Full Stack Developer",
+            "Backend Developer"
+        ],
+        "technology_stack": [
+            "Node.js",
+            "React",
+            "PostgreSQL",
+            "Neo4j"
+        ],
+        "duration_weeks": 8,
+        "modules": [
+            {
+                "name": "User Profiles & Resumes",
+                "description": "Detailed profiles highlighting work experience and skills."
+            },
+            {
+                "name": "Connection Graph",
+                "description": "Using a graph database to manage connections and calculate 'degrees of separation'."
+            },
+            {
+                "name": "Activity Feed",
+                "description": "Chronological and algorithmic feed of posts from connections."
+            },
+            {
+                "name": "Messaging System",
+                "description": "Direct messaging between connected professionals."
+            }
+        ],
+        "learning_outcomes": [
+            "Graph database concepts and querying",
+            "Building scalable social feeds",
+            "Managing user relationships"
+        ],
+        "project_objectives": [
+            "Calculate 2nd and 3rd degree connections efficiently",
+            "Serve activity feeds in under 200ms"
+        ]
+    },
+    {
+        "id": "sm_002",
+        "title": "Short-Form Video Platform",
+        "industry": "Social Media",
+        "client_name": "ClipTok",
+        "description": "A TikTok clone focused on sharing 15-60 second educational clips. Includes video processing, filters, and an infinite scroll feed.",
+        "difficulty": "Hard",
+        "recommended_roles": [
+            "Mobile Developer",
+            "Backend Developer",
+            "DevOps Engineer"
+        ],
+        "technology_stack": [
+            "Flutter",
+            "Go",
+            "AWS MediaConvert",
+            "Redis"
+        ],
+        "duration_weeks": 10,
+        "modules": [
+            {
+                "name": "Video Transcoding Pipeline",
+                "description": "Automatically converting uploaded videos into adaptive bitrates (HLS)."
+            },
+            {
+                "name": "Recommendation Algorithm",
+                "description": "Serving the infinite feed based on user watch time and engagement."
+            },
+            {
+                "name": "Interactive Player",
+                "description": "Mobile UI for swiping between videos instantly with pre-loading."
+            },
+            {
+                "name": "Audio Library Integration",
+                "description": "Allowing users to dub their videos with tracks from a predefined library."
+            }
+        ],
+        "learning_outcomes": [
+            "Video processing and streaming architectures",
+            "Building engaging mobile UIs",
+            "Recommendation system basics"
+        ],
+        "project_objectives": [
+            "Start video playback instantly upon swiping",
+            "Transcode uploads within 30 seconds"
+        ]
+    },
+    {
+        "id": "sm_003",
+        "title": "Community Moderation Dashboard",
+        "industry": "Social Media",
+        "client_name": "SafeSpace Social",
+        "description": "An administrative tool for large online communities to moderate content, utilizing AI for automated toxicity detection.",
+        "difficulty": "Medium",
+        "recommended_roles": [
+            "Frontend Developer",
+            "Machine Learning Engineer"
+        ],
+        "technology_stack": [
+            "React",
+            "Python",
+            "FastAPI",
+            "HuggingFace"
+        ],
+        "duration_weeks": 6,
+        "modules": [
+            {
+                "name": "Automated Flagging",
+                "description": "Using NLP models to detect hate speech, spam, and toxicity in real-time."
+            },
+            {
+                "name": "Moderator Queue",
+                "description": "Efficient UI for human moderators to review flagged content quickly."
+            },
+            {
+                "name": "Appeals System",
+                "description": "Workflow for users to appeal bans and content removals."
+            },
+            {
+                "name": "Analytics & Reporting",
+                "description": "Dashboards showing community health metrics and moderation response times."
+            }
+        ],
+        "learning_outcomes": [
+            "Integrating NLP/ML models into production",
+            "Designing efficient admin interfaces",
+            "Workflow management"
+        ],
+        "project_objectives": [
+            "Automate 60% of obvious spam/toxicity removal",
+            "Provide moderators with sub-second interface navigation"
+        ]
+    },
+    {
+        "id": "sm_004",
+        "title": "Audio Chat Rooms",
+        "industry": "Social Media",
+        "client_name": "VoiceVibe",
+        "description": "A Clubhouse-style platform where users can host and join live audio panels and discussions.",
+        "difficulty": "Hard",
+        "recommended_roles": [
+            "Backend Developer",
+            "Mobile Developer"
+        ],
+        "technology_stack": [
+            "React Native",
+            "Node.js",
+            "WebRTC/Agora API",
+            "Redis"
+        ],
+        "duration_weeks": 8,
+        "modules": [
+            {
+                "name": "Room Management",
+                "description": "Creating scheduled or impromptu rooms with speaker/listener roles."
+            },
+            {
+                "name": "Live Audio Streaming",
+                "description": "Low-latency audio broadcast to potentially thousands of listeners."
+            },
+            {
+                "name": "Hand-Raising Mechanism",
+                "description": "System for listeners to request speaking privileges from moderators."
+            },
+            {
+                "name": "Live Transcription",
+                "description": "Optional closed captioning generated in real-time for accessibility."
+            }
+        ],
+        "learning_outcomes": [
+            "Handling live audio streaming",
+            "Managing real-time roles and permissions",
+            "Integrating accessibility features"
+        ],
+        "project_objectives": [
+            "Support rooms with up to 5,000 concurrent listeners",
+            "Maintain audio latency below 300ms"
+        ]
+    },
+    {
+        "id": "sm_005",
+        "title": "Creator Monetization Platform",
+        "industry": "Social Media",
+        "client_name": "FanFund",
+        "description": "A Patreon-like system where creators can offer subscription tiers and exclusive content to their fans.",
+        "difficulty": "Medium",
+        "recommended_roles": [
+            "Full Stack Developer",
+            "Backend Developer"
+        ],
+        "technology_stack": [
+            "Ruby on Rails",
+            "Vue.js",
+            "PostgreSQL",
+            "Stripe Connect"
+        ],
+        "duration_weeks": 7,
+        "modules": [
+            {
+                "name": "Subscription Tiers",
+                "description": "Creators defining multiple pricing levels and associated perks."
+            },
+            {
+                "name": "Gated Content Delivery",
+                "description": "Ensuring only active subscribers can view posts, videos, or files."
+            },
+            {
+                "name": "Payout Management",
+                "description": "Handling monthly billing, tax withholding, and transferring funds to creators."
+            },
+            {
+                "name": "Engagement Tools",
+                "description": "Polls, Q&As, and direct messaging exclusive to patrons."
+            }
+        ],
+        "learning_outcomes": [
+            "Complex subscription billing",
+            "Content authorization logic",
+            "Financial compliance basics"
+        ],
+        "project_objectives": [
+            "Ensure secure, leak-proof content gating",
+            "Automate creator payouts accurately"
+        ]
+    }
+]

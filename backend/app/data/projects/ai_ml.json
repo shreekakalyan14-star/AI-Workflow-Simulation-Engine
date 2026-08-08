@@ -1,0 +1,236 @@
+[
+    {
+        "id": "ai_001",
+        "title": "AI Resume Screening System",
+        "industry": "AI/ML",
+        "client_name": "HR Tech Solutions",
+        "description": "An automated system that parses uploaded resumes, extracts key skills, and ranks candidates against job descriptions.",
+        "difficulty": "Hard",
+        "recommended_roles": [
+            "Machine Learning Engineer",
+            "Backend Developer"
+        ],
+        "technology_stack": [
+            "Python",
+            "FastAPI",
+            "Spacy",
+            "Transformers (HuggingFace)",
+            "PostgreSQL"
+        ],
+        "duration_weeks": 8,
+        "modules": [
+            {
+                "name": "Document Parsing",
+                "description": "Extracting text from PDF, DOCX, and image formats using OCR and libraries."
+            },
+            {
+                "name": "Named Entity Recognition (NER)",
+                "description": "Using NLP to extract skills, experience years, education, and contact info."
+            },
+            {
+                "name": "Semantic Matching Engine",
+                "description": "Using vector embeddings to compare resume text with job requirements."
+            },
+            {
+                "name": "Bias Mitigation",
+                "description": "Filtering out identifying information to prevent unconscious bias in initial screening."
+            }
+        ],
+        "learning_outcomes": [
+            "Applied NLP and NER",
+            "Working with vector embeddings",
+            "Building ethical AI systems"
+        ],
+        "project_objectives": [
+            "Accurately extract skills from 95% of varied resume formats",
+            "Reduce manual screening time by 70%"
+        ]
+    },
+    {
+        "id": "ai_002",
+        "title": "Predictive Maintenance for Manufacturing",
+        "industry": "AI/ML",
+        "client_name": "Industrial IoT Corp",
+        "description": "A machine learning pipeline that analyzes sensor data from factory machines to predict failures before they happen.",
+        "difficulty": "Hard",
+        "recommended_roles": [
+            "Data Scientist",
+            "Data Engineer"
+        ],
+        "technology_stack": [
+            "Python",
+            "Apache Spark",
+            "Scikit-Learn",
+            "XGBoost",
+            "AWS SageMaker"
+        ],
+        "duration_weeks": 9,
+        "modules": [
+            {
+                "name": "Data Ingestion & Cleaning",
+                "description": "Processing raw vibration, temperature, and acoustic data from machine sensors."
+            },
+            {
+                "name": "Feature Engineering",
+                "description": "Creating rolling averages, frequency domain features, and anomaly scores."
+            },
+            {
+                "name": "Model Training Pipeline",
+                "description": "Automated retraining of models as new failure data becomes available."
+            },
+            {
+                "name": "Alerting Dashboard",
+                "description": "UI highlighting machines with high probability of failure in the next 7 days."
+            }
+        ],
+        "learning_outcomes": [
+            "Time-series forecasting",
+            "Building end-to-end ML pipelines",
+            "Industrial data processing"
+        ],
+        "project_objectives": [
+            "Predict machine failures with 85% accuracy",
+            "Deploy model updates without system downtime"
+        ]
+    },
+    {
+        "id": "ai_003",
+        "title": "Intelligent Customer Support Chatbot",
+        "industry": "AI/ML",
+        "client_name": "RetailGiant",
+        "description": "A conversational AI agent capable of resolving customer order queries, processing returns, and escalating to humans when necessary.",
+        "difficulty": "Medium",
+        "recommended_roles": [
+            "AI Developer",
+            "Backend Developer"
+        ],
+        "technology_stack": [
+            "Python",
+            "Rasa / LangChain",
+            "FastAPI",
+            "React"
+        ],
+        "duration_weeks": 6,
+        "modules": [
+            {
+                "name": "Intent Recognition",
+                "description": "Understanding user queries (e.g., 'Where is my order?' vs 'I want a refund')."
+            },
+            {
+                "name": "System Integration",
+                "description": "Connecting the bot to the company's order management API to fetch real data."
+            },
+            {
+                "name": "Human Handoff",
+                "description": "Seamlessly transferring the chat history to a live agent if the bot is stuck."
+            },
+            {
+                "name": "Conversation Analytics",
+                "description": "Tracking bot resolution rates and identifying common points of failure."
+            }
+        ],
+        "learning_outcomes": [
+            "Building conversational interfaces",
+            "Integrating LLMs/NLP with internal APIs",
+            "Designing human-in-the-loop systems"
+        ],
+        "project_objectives": [
+            "Resolve 50% of incoming customer queries without human intervention",
+            "Maintain conversational context accurately"
+        ]
+    },
+    {
+        "id": "ai_004",
+        "title": "AI Image Generation Service",
+        "industry": "AI/ML",
+        "client_name": "CreativeStudio",
+        "description": "A SaaS platform allowing users to generate marketing assets and graphics using fine-tuned Stable Diffusion models.",
+        "difficulty": "Medium",
+        "recommended_roles": [
+            "Backend Developer",
+            "ML Ops Engineer"
+        ],
+        "technology_stack": [
+            "Python",
+            "FastAPI",
+            "Stable Diffusion",
+            "Celery",
+            "GPU Cloud (RunPod)"
+        ],
+        "duration_weeks": 7,
+        "modules": [
+            {
+                "name": "Prompt Interface",
+                "description": "Frontend for users to enter prompts, negative prompts, and select styles."
+            },
+            {
+                "name": "Asynchronous Job Queue",
+                "description": "Managing GPU utilization by queuing generation requests efficiently."
+            },
+            {
+                "name": "Model Checkpoint Manager",
+                "description": "Loading different fine-tuned models based on user selection (e.g., anime, photorealistic)."
+            },
+            {
+                "name": "Gallery & Cloud Storage",
+                "description": "Saving generated assets to S3 and displaying them in a user gallery."
+            }
+        ],
+        "learning_outcomes": [
+            "Managing GPU resources and asynchronous queues",
+            "Working with generative AI models",
+            "Handling large image files"
+        ],
+        "project_objectives": [
+            "Optimize GPU usage to reduce generation cost",
+            "Keep average wait times under 15 seconds"
+        ]
+    },
+    {
+        "id": "ai_005",
+        "title": "Financial Fraud Detection Engine",
+        "industry": "AI/ML",
+        "client_name": "GlobalBank",
+        "description": "A real-time scoring engine that evaluates credit card transactions for fraudulent patterns within milliseconds.",
+        "difficulty": "Hard",
+        "recommended_roles": [
+            "Data Scientist",
+            "Backend Developer"
+        ],
+        "technology_stack": [
+            "Python",
+            "LightGBM",
+            "Redis",
+            "Kafka",
+            "C++ (for inference speed)"
+        ],
+        "duration_weeks": 10,
+        "modules": [
+            {
+                "name": "Real-time Feature Store",
+                "description": "Using Redis to quickly access historical user behavior (e.g., average spend, locations)."
+            },
+            {
+                "name": "Low-Latency Inference API",
+                "description": "Deploying the ML model to evaluate transactions in under 50ms."
+            },
+            {
+                "name": "Feedback Loop",
+                "description": "System for fraud analysts to label transactions, automatically feeding back into retraining."
+            },
+            {
+                "name": "Explainability Dashboard",
+                "description": "Providing analysts with SHAP values explaining *why* the model flagged a transaction."
+            }
+        ],
+        "learning_outcomes": [
+            "Ultra-low latency ML inference",
+            "Managing feature stores",
+            "Model explainability (XAI)"
+        ],
+        "project_objectives": [
+            "Achieve inference latency of <50ms",
+            "Reduce false positive rates while maintaining high fraud detection"
+        ]
+    }
+]

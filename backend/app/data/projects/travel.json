@@ -1,0 +1,234 @@
+[
+    {
+        "id": "trv_001",
+        "title": "Flight & Hotel Booking Aggregator",
+        "industry": "Travel",
+        "client_name": "VoyageSearch",
+        "description": "A platform that searches multiple airline and hotel APIs to find the best deals, allowing users to book integrated itineraries.",
+        "difficulty": "Hard",
+        "recommended_roles": [
+            "Backend Developer",
+            "Frontend Developer"
+        ],
+        "technology_stack": [
+            "FastAPI",
+            "React",
+            "Redis",
+            "PostgreSQL",
+            "Celery"
+        ],
+        "duration_weeks": 9,
+        "modules": [
+            {
+                "name": "API Aggregation Engine",
+                "description": "Concurrently querying dozens of external travel APIs and standardizing responses."
+            },
+            {
+                "name": "Pricing & Caching",
+                "description": "Caching frequent routes in Redis while ensuring price accuracy."
+            },
+            {
+                "name": "Itinerary Builder",
+                "description": "Combining flights, hotels, and car rentals into a single logical trip."
+            },
+            {
+                "name": "Payment & Ticketing",
+                "description": "Processing payments and issuing e-tickets via GDS integrations."
+            }
+        ],
+        "learning_outcomes": [
+            "Handling slow external APIs concurrently",
+            "Advanced caching strategies",
+            "Complex data normalization"
+        ],
+        "project_objectives": [
+            "Return aggregated search results in under 3 seconds",
+            "Handle API rate limits gracefully"
+        ]
+    },
+    {
+        "id": "trv_002",
+        "title": "Vacation Rental Management System",
+        "industry": "Travel",
+        "client_name": "StayHost Pro",
+        "description": "A platform for property managers to sync their listings, calendars, and messages across Airbnb, VRBO, and Booking.com.",
+        "difficulty": "Medium",
+        "recommended_roles": [
+            "Backend Developer",
+            "Full Stack Developer"
+        ],
+        "technology_stack": [
+            "Node.js",
+            "Express",
+            "Vue.js",
+            "MongoDB"
+        ],
+        "duration_weeks": 7,
+        "modules": [
+            {
+                "name": "Channel Manager",
+                "description": "Syncing availability calendars (iCal) to prevent double bookings."
+            },
+            {
+                "name": "Unified Inbox",
+                "description": "Aggregating guest messages from multiple platforms into one interface."
+            },
+            {
+                "name": "Dynamic Pricing",
+                "description": "Adjusting nightly rates based on seasonality, local events, and occupancy."
+            },
+            {
+                "name": "Task Automation",
+                "description": "Automatically scheduling cleaning staff after check-outs."
+            }
+        ],
+        "learning_outcomes": [
+            "Integrating with major travel platform APIs",
+            "Building unified communication interfaces",
+            "Automated scheduling logic"
+        ],
+        "project_objectives": [
+            "Eliminate double bookings across platforms",
+            "Automate 90% of routine guest communication"
+        ]
+    },
+    {
+        "id": "trv_003",
+        "title": "Ride Booking Platform",
+        "industry": "Travel",
+        "client_name": "CityTransit",
+        "description": "An Uber-like platform for booking on-demand rides, featuring real-time driver tracking, surge pricing, and rating systems.",
+        "difficulty": "Hard",
+        "recommended_roles": [
+            "Mobile Developer",
+            "Backend Developer",
+            "Data Engineer"
+        ],
+        "technology_stack": [
+            "Flutter",
+            "Go",
+            "PostgreSQL",
+            "PostGIS",
+            "WebSockets"
+        ],
+        "duration_weeks": 10,
+        "modules": [
+            {
+                "name": "Driver/Rider Matching",
+                "description": "Geospatial queries to find the nearest available driver to a rider."
+            },
+            {
+                "name": "Real-Time Tracking",
+                "description": "WebSocket integration to show the car moving on a map live."
+            },
+            {
+                "name": "Dynamic Pricing Engine",
+                "description": "Algorithm adjusting prices based on current demand and traffic conditions."
+            },
+            {
+                "name": "Trip Management",
+                "description": "Handling state transitions (requested, accepted, arrived, in-progress, completed)."
+            }
+        ],
+        "learning_outcomes": [
+            "Geospatial databases and queries",
+            "Real-time location tracking",
+            "Building complex state machines"
+        ],
+        "project_objectives": [
+            "Match riders to drivers in under 5 seconds",
+            "Accurately track location even with spotty network coverage"
+        ]
+    },
+    {
+        "id": "trv_004",
+        "title": "Travel Itinerary Planning App",
+        "industry": "Travel",
+        "client_name": "WanderPlan",
+        "description": "A collaborative tool for groups to plan trips together. Features drag-and-drop daily schedules, expense splitting, and offline access.",
+        "difficulty": "Medium",
+        "recommended_roles": [
+            "Frontend Developer",
+            "Mobile Developer"
+        ],
+        "technology_stack": [
+            "React Native",
+            "Firebase",
+            "Node.js"
+        ],
+        "duration_weeks": 6,
+        "modules": [
+            {
+                "name": "Collaborative Planner",
+                "description": "Real-time synced calendar where multiple users can add destinations."
+            },
+            {
+                "name": "Expense Splitter",
+                "description": "Calculating who owes whom for shared trip costs."
+            },
+            {
+                "name": "Places Integration",
+                "description": "Pulling details, photos, and reviews from Google Places API."
+            },
+            {
+                "name": "Offline Mode",
+                "description": "Caching itinerary data locally so it works without internet while traveling."
+            }
+        ],
+        "learning_outcomes": [
+            "Offline-first mobile development",
+            "Collaborative state synchronization",
+            "Financial math for expense splitting"
+        ],
+        "project_objectives": [
+            "Provide seamless offline access to trip plans",
+            "Ensure immediate sync of changes when online"
+        ]
+    },
+    {
+        "id": "trv_005",
+        "title": "Corporate Travel Policy Enforcer",
+        "industry": "Travel",
+        "client_name": "BizTravel Solutions",
+        "description": "A system integrated with booking tools that checks flights and hotels against company policies before allowing purchase.",
+        "difficulty": "Medium",
+        "recommended_roles": [
+            "Backend Developer",
+            "Security Engineer"
+        ],
+        "technology_stack": [
+            "Python",
+            "FastAPI",
+            "PostgreSQL",
+            "Rules Engine"
+        ],
+        "duration_weeks": 5,
+        "modules": [
+            {
+                "name": "Policy Rules Engine",
+                "description": "Interface for HR to define limits (e.g., max $200/night for hotel, economy flights only)."
+            },
+            {
+                "name": "Booking Interceptor",
+                "description": "API that evaluates proposed itineraries against the rules in real-time."
+            },
+            {
+                "name": "Exception Workflows",
+                "description": "Routing out-of-policy requests to managers for manual approval."
+            },
+            {
+                "name": "Reporting Dashboard",
+                "description": "Analytics showing compliance rates and potential savings."
+            }
+        ],
+        "learning_outcomes": [
+            "Building flexible rules engines",
+            "Workflow and approval routing",
+            "API design for middleware"
+        ],
+        "project_objectives": [
+            "Evaluate policies in under 100ms",
+            "Reduce out-of-policy travel spend by 20%"
+        ]
+    }
+]

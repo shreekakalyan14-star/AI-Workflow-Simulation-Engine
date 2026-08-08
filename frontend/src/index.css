@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+@layer components {
+  .input {
+    @apply w-full rounded-md border border-border bg-surface-2 px-3 py-2 text-sm text-text placeholder:text-text-faint outline-none transition-colors focus:border-status-todo;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-md bg-status-todo px-4 py-2 text-sm font-medium text-ink transition-opacity hover:opacity-90 disabled:opacity-50;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center rounded-md border border-border px-3 py-1.5 text-xs text-text-muted transition-colors hover:border-status-todo hover:text-text;
+  }
+  .card {
+    @apply rounded-lg border border-border bg-surface p-4;
+  }
+}
+
+@theme {
+  /* ---- Surfaces (deep ink, not pure black) ---- */
+  --color-ink: #0a0f1a;
+  --color-surface: #111826;
+  --color-surface-2: #171f31;
+  --color-surface-3: #1e2740;
+  --color-border: #253052;
+  --color-border-soft: #1b2439;
+
+  /* ---- Text ---- */
+  --color-text: #e8ecf6;
+  --color-text-muted: #8d99bd;
+  --color-text-faint: #5a6488;
+
+  /* ---- Status hues (Kanban columns — each means a real state, not decoration) ---- */
+  --color-status-backlog: #5a6488;
+  --color-status-todo: #5b8def;
+  --color-status-progress: #f2a93b;
+  --color-status-review: #a389f4;
+  --color-status-blocked: #ef5b5b;
+  --color-status-completed: #3ed695;
+
+  /* ---- Priority hues ---- */
+  --color-priority-low: #5a6488;
+  --color-priority-medium: #5b8def;
+  --color-priority-high: #f2a93b;
+  --color-priority-critical: #ef5b5b;
+
+  /* ---- Signature accent (manager mood strip) ---- */
+  --color-mood-good: #3ed695;
+  --color-mood-ok: #f2a93b;
+  --color-mood-bad: #ef5b5b;
+
+  /* ---- Type ---- */
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+::selection {
+  background: var(--color-status-todo);
+  color: var(--color-ink);
+}
+
+/* Scrollbars that fit the workbench, not the OS default */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-surface-3);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border);
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Visible keyboard focus everywhere */
+:focus-visible {
+  outline: 2px solid var(--color-status-todo);
+  outline-offset: 2px;
+}
+
+/* Blinking terminal cursor for the status strip signature element */
+@keyframes blink-cursor {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  50%,
+  95% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.cursor-blink {
+  animation: blink-cursor 1.1s step-end infinite;
+}
+
+@keyframes pulse-dot {
+  0% {
+    box-shadow: 0 0 0 0 currentColor;
+    opacity: 1;
+  }
+  70% {
+    box-shadow: 0 0 0 6px transparent;
+    opacity: 0.4;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+    opacity: 1;
+  }
+}
+.pulse-dot {
+  animation: pulse-dot 2.2s ease-out infinite;
+}

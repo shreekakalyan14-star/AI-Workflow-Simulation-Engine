@@ -1,0 +1,235 @@
+[
+    {
+        "id": "edu_001",
+        "title": "Learning Management System (LMS)",
+        "industry": "Education",
+        "client_name": "Global University",
+        "description": "A comprehensive LMS for universities to host courses, manage assignments, and track student grades. Features video hosting and plagiarism detection.",
+        "difficulty": "Hard",
+        "recommended_roles": [
+            "Full Stack Developer",
+            "Backend Developer",
+            "DevOps"
+        ],
+        "technology_stack": [
+            "Python",
+            "Django",
+            "React",
+            "PostgreSQL",
+            "AWS S3"
+        ],
+        "duration_weeks": 8,
+        "modules": [
+            {
+                "name": "Course Delivery",
+                "description": "Structured modules with video streaming, PDFs, and interactive quizzes."
+            },
+            {
+                "name": "Assignment & Grading",
+                "description": "Submission portals with rubrics, inline grading, and gradebook calculation."
+            },
+            {
+                "name": "Plagiarism Checker Integration",
+                "description": "Automated submission of documents to Turnitin or similar APIs."
+            },
+            {
+                "name": "Discussion Forums",
+                "description": "Threaded discussions for students and TAs."
+            }
+        ],
+        "learning_outcomes": [
+            "Building complex, multi-role systems",
+            "Video streaming integration",
+            "Implementing threaded discussions"
+        ],
+        "project_objectives": [
+            "Support 50,000 active students",
+            "Ensure high availability during exam periods"
+        ]
+    },
+    {
+        "id": "edu_002",
+        "title": "Interactive Coding Bootcamp Platform",
+        "industry": "Education",
+        "client_name": "CodeMaster Academy",
+        "description": "An online platform where students can write, execute, and test code directly in the browser with real-time feedback.",
+        "difficulty": "Hard",
+        "recommended_roles": [
+            "Backend Developer",
+            "DevOps Engineer"
+        ],
+        "technology_stack": [
+            "FastAPI",
+            "Docker",
+            "React",
+            "Redis"
+        ],
+        "duration_weeks": 7,
+        "modules": [
+            {
+                "name": "In-Browser Code Editor",
+                "description": "Monaco editor integration with syntax highlighting and auto-complete."
+            },
+            {
+                "name": "Code Execution Engine",
+                "description": "Secure, sandboxed execution of user code using Docker containers."
+            },
+            {
+                "name": "Automated Testing",
+                "description": "Running student code against hidden test cases and returning results."
+            },
+            {
+                "name": "Progress Tracking",
+                "description": "Gamified dashboard showing completed challenges and skill trees."
+            }
+        ],
+        "learning_outcomes": [
+            "Containerization and secure sandboxing",
+            "Handling remote code execution safely",
+            "Building interactive frontends"
+        ],
+        "project_objectives": [
+            "Execute user code within 2 seconds securely",
+            "Prevent malicious code from affecting the host server"
+        ]
+    },
+    {
+        "id": "edu_003",
+        "title": "Student Information System (SIS)",
+        "industry": "Education",
+        "client_name": "Springfield School District",
+        "description": "A centralized database system for managing student records, attendance, timetables, and parent communications.",
+        "difficulty": "Medium",
+        "recommended_roles": [
+            "Backend Developer",
+            "Frontend Developer"
+        ],
+        "technology_stack": [
+            "PHP",
+            "Laravel",
+            "Vue.js",
+            "MySQL"
+        ],
+        "duration_weeks": 6,
+        "modules": [
+            {
+                "name": "Demographics & Records",
+                "description": "Managing student personal information, medical records, and disciplinary history."
+            },
+            {
+                "name": "Timetabling",
+                "description": "Algorithm to generate conflict-free class schedules for teachers and students."
+            },
+            {
+                "name": "Attendance Tracking",
+                "description": "Daily and period-based attendance logging with automated alerts for absentees."
+            },
+            {
+                "name": "Parent Portal",
+                "description": "Secure login for parents to view grades, attendance, and communicate with teachers."
+            }
+        ],
+        "learning_outcomes": [
+            "Complex relational database design",
+            "Algorithmic problem solving (timetabling)",
+            "Building secure portals"
+        ],
+        "project_objectives": [
+            "Generate a school-wide timetable without conflicts",
+            "Secure sensitive student data"
+        ]
+    },
+    {
+        "id": "edu_004",
+        "title": "Language Learning App",
+        "industry": "Education",
+        "client_name": "LingoSphere",
+        "description": "A gamified mobile application for learning new languages using spaced repetition systems (SRS) and voice recognition.",
+        "difficulty": "Medium",
+        "recommended_roles": [
+            "Mobile Developer",
+            "Backend Developer"
+        ],
+        "technology_stack": [
+            "React Native",
+            "Node.js",
+            "MongoDB",
+            "Google Cloud Speech-to-Text"
+        ],
+        "duration_weeks": 5,
+        "modules": [
+            {
+                "name": "Spaced Repetition Engine",
+                "description": "Algorithm to schedule vocabulary reviews based on user performance."
+            },
+            {
+                "name": "Speech Evaluation",
+                "description": "Using speech-to-text to evaluate user pronunciation accuracy."
+            },
+            {
+                "name": "Gamification System",
+                "description": "Points, streaks, leaderboards, and achievement badges."
+            },
+            {
+                "name": "Content Management",
+                "description": "Admin panel for linguists to add new languages and lessons."
+            }
+        ],
+        "learning_outcomes": [
+            "Implementing spaced repetition algorithms",
+            "Integrating speech recognition APIs",
+            "Mobile app gamification"
+        ],
+        "project_objectives": [
+            "Improve vocabulary retention by 50%",
+            "Provide sub-second feedback on pronunciation"
+        ]
+    },
+    {
+        "id": "edu_005",
+        "title": "Virtual Classroom & Whiteboard",
+        "industry": "Education",
+        "client_name": "TutorConnect",
+        "description": "A real-time collaborative platform for 1-on-1 and small group tutoring, featuring a shared interactive whiteboard and audio/video.",
+        "difficulty": "Hard",
+        "recommended_roles": [
+            "Frontend Developer",
+            "Backend Developer"
+        ],
+        "technology_stack": [
+            "React",
+            "Fabric.js",
+            "Node.js",
+            "Socket.io",
+            "WebRTC"
+        ],
+        "duration_weeks": 6,
+        "modules": [
+            {
+                "name": "Interactive Whiteboard",
+                "description": "Canvas for drawing, adding text, and shapes synced in real-time across all users."
+            },
+            {
+                "name": "Document Annotation",
+                "description": "Uploading PDFs and allowing users to draw over them collaboratively."
+            },
+            {
+                "name": "A/V Conferencing",
+                "description": "Integrated video calling alongside the whiteboard."
+            },
+            {
+                "name": "Session Recording",
+                "description": "Recording the canvas actions and audio for playback later."
+            }
+        ],
+        "learning_outcomes": [
+            "Real-time state synchronization",
+            "HTML5 Canvas manipulation",
+            "WebRTC for media streams"
+        ],
+        "project_objectives": [
+            "Synchronize drawing strokes with <50ms latency",
+            "Support smooth rendering of complex annotations"
+        ]
+    }
+]

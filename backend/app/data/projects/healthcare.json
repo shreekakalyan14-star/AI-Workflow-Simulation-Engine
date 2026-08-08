@@ -1,0 +1,242 @@
+[
+    {
+        "id": "hc_001",
+        "title": "Hospital Management System",
+        "industry": "Healthcare",
+        "client_name": "Metro General Hospital",
+        "description": "A comprehensive hospital management system handling patient admissions, scheduling, electronic health records (EHR), and billing. The system needs to be HIPAA compliant and support high concurrency.",
+        "difficulty": "Hard",
+        "recommended_roles": [
+            "Backend Developer",
+            "Frontend Developer",
+            "Database Administrator",
+            "DevOps Engineer"
+        ],
+        "technology_stack": [
+            "FastAPI",
+            "PostgreSQL",
+            "React",
+            "Docker",
+            "Redis"
+        ],
+        "duration_weeks": 8,
+        "modules": [
+            {
+                "name": "Patient Registration & Admissions",
+                "description": "Module for handling patient intake, generating medical record numbers, and ward assignments."
+            },
+            {
+                "name": "Appointment Scheduling",
+                "description": "Booking and managing appointments with doctors, including automated reminders."
+            },
+            {
+                "name": "Electronic Health Records (EHR)",
+                "description": "Secure storage and retrieval of patient medical histories, lab results, and prescriptions."
+            },
+            {
+                "name": "Billing & Insurance",
+                "description": "Automated invoice generation, insurance claim processing, and payment gateway integration."
+            },
+            {
+                "name": "Staff Management",
+                "description": "Roster scheduling, payroll integration, and role-based access control for medical staff."
+            }
+        ],
+        "learning_outcomes": [
+            "Experience with HIPAA compliance and data security",
+            "Building complex relational database schemas",
+            "Handling role-based access control (RBAC)",
+            "Integrating third-party APIs for payments and messaging"
+        ],
+        "project_objectives": [
+            "Reduce patient admission time by 30%",
+            "Ensure 99.9% uptime for the EHR system",
+            "Automate 80% of routine insurance claims"
+        ]
+    },
+    {
+        "id": "hc_002",
+        "title": "Telemedicine Consultation Platform",
+        "industry": "Healthcare",
+        "client_name": "VirtualCare Health",
+        "description": "A secure video consultation platform connecting patients with specialist doctors. Includes real-time chat, video conferencing, and digital prescriptions.",
+        "difficulty": "Medium",
+        "recommended_roles": [
+            "Full Stack Developer",
+            "Mobile Developer"
+        ],
+        "technology_stack": [
+            "FastAPI",
+            "React Native",
+            "WebRTC",
+            "PostgreSQL",
+            "Socket.io"
+        ],
+        "duration_weeks": 6,
+        "modules": [
+            {
+                "name": "Video Consultation Room",
+                "description": "Secure WebRTC-based video calling with screen sharing capabilities."
+            },
+            {
+                "name": "Real-time Chat",
+                "description": "Encrypted messaging between patient and doctor before/after consultations."
+            },
+            {
+                "name": "Digital Prescriptions",
+                "description": "Securely generate and send prescriptions to affiliated pharmacies."
+            },
+            {
+                "name": "Doctor Directory & Rating",
+                "description": "Searchable directory of specialists with patient reviews and ratings."
+            }
+        ],
+        "learning_outcomes": [
+            "WebRTC implementation",
+            "Real-time communication with WebSockets",
+            "Mobile app development basics"
+        ],
+        "project_objectives": [
+            "Support 500 concurrent video calls",
+            "Achieve sub-second latency for chat messages"
+        ]
+    },
+    {
+        "id": "hc_003",
+        "title": "Pharmacy Inventory & Dispensing System",
+        "industry": "Healthcare",
+        "client_name": "PharmaPlus Chain",
+        "description": "An automated inventory management system for a chain of pharmacies. Tracks stock levels, expiry dates, and automates reordering from suppliers.",
+        "difficulty": "Medium",
+        "recommended_roles": [
+            "Backend Developer",
+            "Frontend Developer"
+        ],
+        "technology_stack": [
+            "Django",
+            "Vue.js",
+            "MySQL",
+            "Celery"
+        ],
+        "duration_weeks": 5,
+        "modules": [
+            {
+                "name": "Inventory Tracking",
+                "description": "Real-time tracking of medicine stock across multiple store locations."
+            },
+            {
+                "name": "Expiry Alert System",
+                "description": "Automated notifications for medicines approaching their expiry dates."
+            },
+            {
+                "name": "Supplier Integration",
+                "description": "Automated PO generation and API integration with major pharmaceutical suppliers."
+            },
+            {
+                "name": "Point of Sale (POS)",
+                "description": "Retail checkout interface supporting barcode scanning and receipt printing."
+            }
+        ],
+        "learning_outcomes": [
+            "Background task processing with Celery",
+            "Inventory algorithms",
+            "Multi-tenant architecture basics"
+        ],
+        "project_objectives": [
+            "Reduce expired stock by 90%",
+            "Automate 100% of purchase orders for fast-moving goods"
+        ]
+    },
+    {
+        "id": "hc_004",
+        "title": "Medical Imaging Storage System (PACS)",
+        "industry": "Healthcare",
+        "client_name": "Radiology Imaging Centers",
+        "description": "A Picture Archiving and Communication System (PACS) for storing, retrieving, and sharing medical images (X-Rays, MRIs) securely.",
+        "difficulty": "Hard",
+        "recommended_roles": [
+            "Backend Developer",
+            "Cloud Architect"
+        ],
+        "technology_stack": [
+            "FastAPI",
+            "Python",
+            "AWS S3",
+            "PostgreSQL",
+            "DICOM"
+        ],
+        "duration_weeks": 7,
+        "modules": [
+            {
+                "name": "DICOM Ingestion",
+                "description": "Parsing and storing DICOM format medical images."
+            },
+            {
+                "name": "Secure Storage",
+                "description": "Encrypted storage on cloud object storage with lifecycle policies."
+            },
+            {
+                "name": "Image Viewer Web App",
+                "description": "Browser-based viewing tools for radiologists (zoom, pan, contrast)."
+            },
+            {
+                "name": "Secure Sharing Link",
+                "description": "Generating time-limited, encrypted links for external physicians to view images."
+            }
+        ],
+        "learning_outcomes": [
+            "Handling large file uploads and storage",
+            "Working with industry-specific data formats (DICOM)",
+            "Cloud storage management"
+        ],
+        "project_objectives": [
+            "Handle uploads of up to 5GB per study",
+            "Ensure zero data loss for archived images"
+        ]
+    },
+    {
+        "id": "hc_005",
+        "title": "Fitness & Rehabilitation Tracker App",
+        "industry": "Healthcare",
+        "client_name": "PhysioTech Solutions",
+        "description": "A mobile platform for physical therapists to assign exercise regimens to patients and track their recovery progress.",
+        "difficulty": "Easy",
+        "recommended_roles": [
+            "Mobile Developer",
+            "Backend Developer"
+        ],
+        "technology_stack": [
+            "Flutter",
+            "Firebase",
+            "Node.js"
+        ],
+        "duration_weeks": 4,
+        "modules": [
+            {
+                "name": "Exercise Library",
+                "description": "Categorized video library of physical therapy exercises."
+            },
+            {
+                "name": "Routine Builder",
+                "description": "Interface for therapists to create custom daily routines for patients."
+            },
+            {
+                "name": "Progress Tracking",
+                "description": "Patient self-reporting and visual charts of recovery milestones."
+            },
+            {
+                "name": "Wearable Integration",
+                "description": "Syncing step counts and heart rate from Apple Health and Google Fit."
+            }
+        ],
+        "learning_outcomes": [
+            "Mobile app state management",
+            "Third-party health API integration",
+            "Basic data visualization"
+        ],
+        "project_objectives": [
+            "Increase patient adherence to exercises by 40%",
+            "Seamless integration with iOS and Android health kits"
+        ]
+    }
+]

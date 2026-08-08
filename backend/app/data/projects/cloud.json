@@ -1,0 +1,233 @@
+[
+    {
+        "id": "cld_001",
+        "title": "Cloud Storage Platform",
+        "industry": "Cloud Infrastructure",
+        "client_name": "DriveSync",
+        "description": "A Dropbox-like file hosting service offering cloud storage, file synchronization, personal cloud, and client software.",
+        "difficulty": "Hard",
+        "recommended_roles": [
+            "Backend Developer",
+            "System Architect",
+            "DevOps Engineer"
+        ],
+        "technology_stack": [
+            "Go",
+            "React",
+            "AWS S3",
+            "PostgreSQL",
+            "gRPC"
+        ],
+        "duration_weeks": 10,
+        "modules": [
+            {
+                "name": "Chunked Uploads",
+                "description": "Splitting large files into smaller chunks for reliable uploading and resuming."
+            },
+            {
+                "name": "File Synchronization",
+                "description": "Desktop client integration to sync local folders with cloud storage via polling/websockets."
+            },
+            {
+                "name": "Deduplication Engine",
+                "description": "Identifying identical files to save storage space on the backend."
+            },
+            {
+                "name": "Link Sharing & Permissions",
+                "description": "Generating public/private links with expiration dates and passwords."
+            }
+        ],
+        "learning_outcomes": [
+            "Handling massive file I/O operations",
+            "Implementing block-level sync algorithms",
+            "Storage optimization techniques"
+        ],
+        "project_objectives": [
+            "Support reliable uploads of 50GB+ files",
+            "Minimize storage costs through deduplication"
+        ]
+    },
+    {
+        "id": "cld_002",
+        "title": "Serverless Function Platform",
+        "industry": "Cloud Infrastructure",
+        "client_name": "LambdaLite",
+        "description": "A miniature serverless platform allowing users to deploy and run code snippets in response to HTTP triggers.",
+        "difficulty": "Hard",
+        "recommended_roles": [
+            "DevOps Engineer",
+            "Backend Developer"
+        ],
+        "technology_stack": [
+            "Node.js",
+            "Docker",
+            "Kubernetes",
+            "Redis"
+        ],
+        "duration_weeks": 8,
+        "modules": [
+            {
+                "name": "Code Ingestion",
+                "description": "API to accept user code (Node/Python) and package it."
+            },
+            {
+                "name": "Container Orchestration",
+                "description": "Spinning up Docker containers on-demand when a function is triggered."
+            },
+            {
+                "name": "API Gateway",
+                "description": "Routing HTTP requests to the correct running container function."
+            },
+            {
+                "name": "Metering & Billing",
+                "description": "Tracking execution time (in milliseconds) and memory usage for billing."
+            }
+        ],
+        "learning_outcomes": [
+            "Advanced Docker and Kubernetes APIs",
+            "Building multi-tenant execution environments",
+            "Micro-billing systems"
+        ],
+        "project_objectives": [
+            "Achieve cold start times under 500ms",
+            "Isolate user code securely"
+        ]
+    },
+    {
+        "id": "cld_003",
+        "title": "Infrastructure as Code (IaC) Dashboard",
+        "industry": "Cloud Infrastructure",
+        "client_name": "CloudOps Control",
+        "description": "A web interface wrapping Terraform to allow non-technical teams to provision standardized cloud resources safely.",
+        "difficulty": "Medium",
+        "recommended_roles": [
+            "DevOps Engineer",
+            "Frontend Developer"
+        ],
+        "technology_stack": [
+            "Python",
+            "FastAPI",
+            "React",
+            "Terraform"
+        ],
+        "duration_weeks": 6,
+        "modules": [
+            {
+                "name": "Template Catalog",
+                "description": "Pre-approved Terraform modules (e.g., 'Standard Web Server', 'Secure Database')."
+            },
+            {
+                "name": "Provisioning Engine",
+                "description": "Executing Terraform plans and applies via backend jobs."
+            },
+            {
+                "name": "State Management",
+                "description": "Securely storing and managing Terraform state files in S3/DynamoDB."
+            },
+            {
+                "name": "Cost Estimator",
+                "description": "Using Infracost or AWS APIs to show projected costs before provisioning."
+            }
+        ],
+        "learning_outcomes": [
+            "Integrating CLI tools with web backends",
+            "Managing cloud resources programmatically",
+            "Cloud cost management"
+        ],
+        "project_objectives": [
+            "Prevent misconfigured infrastructure deployments",
+            "Provide accurate cost estimates pre-deployment"
+        ]
+    },
+    {
+        "id": "cld_004",
+        "title": "Multi-Cloud Billing Analyzer",
+        "industry": "Cloud Infrastructure",
+        "client_name": "FinOps Master",
+        "description": "A tool that aggregates billing data from AWS, GCP, and Azure to provide unified dashboards and cost-saving recommendations.",
+        "difficulty": "Medium",
+        "recommended_roles": [
+            "Data Engineer",
+            "Backend Developer"
+        ],
+        "technology_stack": [
+            "Python",
+            "Django",
+            "Snowflake",
+            "Vue.js"
+        ],
+        "duration_weeks": 7,
+        "modules": [
+            {
+                "name": "Data Ingestion Pipeline",
+                "description": "Parsing massive Cost and Usage Reports (CUR) from cloud providers daily."
+            },
+            {
+                "name": "Data Normalization",
+                "description": "Standardizing services (e.g., EC2 and Compute Engine mapped to 'Compute')."
+            },
+            {
+                "name": "Anomaly Detection",
+                "description": "Alerting users if daily spend spikes unexpectedly on a specific resource."
+            },
+            {
+                "name": "Optimization Insights",
+                "description": "Identifying idle resources or recommending reserved instances."
+            }
+        ],
+        "learning_outcomes": [
+            "Processing massive datasets",
+            "Cloud billing complexities",
+            "Anomaly detection algorithms"
+        ],
+        "project_objectives": [
+            "Process gigabytes of billing data quickly",
+            "Identify at least 10% potential cost savings for clients"
+        ]
+    },
+    {
+        "id": "cld_005",
+        "title": "Database Migration Service",
+        "industry": "Cloud Infrastructure",
+        "client_name": "DataShift Cloud",
+        "description": "A service to replicate and migrate databases from on-premise servers to cloud managed databases with minimal downtime.",
+        "difficulty": "Hard",
+        "recommended_roles": [
+            "Database Administrator",
+            "Backend Developer"
+        ],
+        "technology_stack": [
+            "Go",
+            "Kafka",
+            "MySQL/PostgreSQL Native APIs"
+        ],
+        "duration_weeks": 9,
+        "modules": [
+            {
+                "name": "Schema Conversion",
+                "description": "Translating table structures and data types between different DB engines."
+            },
+            {
+                "name": "Initial Snapshot",
+                "description": "Efficiently transferring the bulk initial data load without locking tables."
+            },
+            {
+                "name": "CDC (Change Data Capture)",
+                "description": "Tailing database transaction logs (e.g., binlog, WAL) to replicate ongoing changes."
+            },
+            {
+                "name": "Validation Engine",
+                "description": "Comparing source and target databases to ensure zero data corruption."
+            }
+        ],
+        "learning_outcomes": [
+            "Deep understanding of database internals and transaction logs",
+            "Building reliable data pipelines",
+            "Minimizing downtime during migrations"
+        ],
+        "project_objectives": [
+            "Migrate TB-scale databases",
+            "Keep replication lag under 1 second during CDC phase"
+        ]
+    }
+]

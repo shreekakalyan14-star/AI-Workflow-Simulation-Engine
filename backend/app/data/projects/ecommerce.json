@@ -1,0 +1,233 @@
+[
+    {
+        "id": "eco_001",
+        "title": "Multi-Vendor Marketplace",
+        "industry": "E-Commerce",
+        "client_name": "ShopGlobal",
+        "description": "A platform like Amazon where third-party sellers can list products, manage inventory, and fulfill orders, while the platform handles payments and commissions.",
+        "difficulty": "Hard",
+        "recommended_roles": [
+            "Backend Developer",
+            "Database Administrator"
+        ],
+        "technology_stack": [
+            "Node.js",
+            "NestJS",
+            "PostgreSQL",
+            "Redis",
+            "Stripe Connect"
+        ],
+        "duration_weeks": 10,
+        "modules": [
+            {
+                "name": "Vendor Portal",
+                "description": "Dashboard for sellers to add products, view analytics, and manage orders."
+            },
+            {
+                "name": "Catalog Management",
+                "description": "Complex product taxonomy, variants, and inventory tracking."
+            },
+            {
+                "name": "Split Payments",
+                "description": "Routing payments from buyers to vendors while deducting platform fees automatically."
+            },
+            {
+                "name": "Review System",
+                "description": "Verified purchase reviews for both products and sellers."
+            }
+        ],
+        "learning_outcomes": [
+            "Complex marketplace payment flows",
+            "Multi-tenant architecture",
+            "Handling complex product variants and inventory"
+        ],
+        "project_objectives": [
+            "Successfully handle split payments seamlessly",
+            "Support millions of SKUs with fast search"
+        ]
+    },
+    {
+        "id": "eco_002",
+        "title": "B2B Wholesale Portal",
+        "industry": "E-Commerce",
+        "client_name": "TradeBulk Distributors",
+        "description": "An e-commerce platform tailored for business-to-business transactions, featuring tiered pricing, bulk ordering, and credit terms.",
+        "difficulty": "Medium",
+        "recommended_roles": [
+            "Backend Developer",
+            "Frontend Developer"
+        ],
+        "technology_stack": [
+            "Python",
+            "Django",
+            "Vue.js",
+            "PostgreSQL"
+        ],
+        "duration_weeks": 7,
+        "modules": [
+            {
+                "name": "Tiered Pricing Engine",
+                "description": "Dynamic pricing based on customer groups and order volume."
+            },
+            {
+                "name": "Quick Order Interface",
+                "description": "Allowing buyers to upload CSVs of SKUs for rapid bulk purchasing."
+            },
+            {
+                "name": "Credit Management",
+                "description": "Handling net-30/net-60 payment terms and credit limits."
+            },
+            {
+                "name": "Quote Generation",
+                "description": "System for buyers to request custom quotes and sales reps to approve them."
+            }
+        ],
+        "learning_outcomes": [
+            "Implementing complex pricing algorithms",
+            "B2B specific business logic",
+            "Handling custom payment terms"
+        ],
+        "project_objectives": [
+            "Automate 80% of wholesale orders",
+            "Provide accurate, dynamic pricing instantly"
+        ]
+    },
+    {
+        "id": "eco_003",
+        "title": "Direct-to-Consumer (D2C) Subscription Box",
+        "industry": "E-Commerce",
+        "client_name": "FreshBeans Coffee",
+        "description": "A subscription-based e-commerce site for a coffee brand. Users can subscribe to monthly deliveries, pause, or customize their boxes.",
+        "difficulty": "Medium",
+        "recommended_roles": [
+            "Full Stack Developer",
+            "Backend Developer"
+        ],
+        "technology_stack": [
+            "Ruby on Rails",
+            "React",
+            "PostgreSQL",
+            "Stripe Billing"
+        ],
+        "duration_weeks": 6,
+        "modules": [
+            {
+                "name": "Subscription Engine",
+                "description": "Managing recurring billing cycles and renewal states."
+            },
+            {
+                "name": "Box Customization",
+                "description": "Interface for users to pick specific items for their upcoming delivery."
+            },
+            {
+                "name": "Fulfillment Export",
+                "description": "Generating monthly pick-and-pack lists for the warehouse."
+            },
+            {
+                "name": "Churn Prediction",
+                "description": "Basic analytics to identify users likely to cancel."
+            }
+        ],
+        "learning_outcomes": [
+            "Integrating recurring billing systems",
+            "Managing complex order states",
+            "Building flexible frontend customization interfaces"
+        ],
+        "project_objectives": [
+            "Reduce payment failures through automated retries",
+            "Streamline the monthly fulfillment process"
+        ]
+    },
+    {
+        "id": "eco_004",
+        "title": "Flash Sale & Auction Platform",
+        "industry": "E-Commerce",
+        "client_name": "BidWin",
+        "description": "A high-traffic e-commerce platform that hosts time-limited sales and live bidding on exclusive products.",
+        "difficulty": "Hard",
+        "recommended_roles": [
+            "Backend Developer",
+            "DevOps Engineer"
+        ],
+        "technology_stack": [
+            "Go",
+            "React",
+            "Redis",
+            "WebSockets"
+        ],
+        "duration_weeks": 8,
+        "modules": [
+            {
+                "name": "Live Bidding Engine",
+                "description": "Real-time, WebSocket-based system to handle bids concurrently."
+            },
+            {
+                "name": "Inventory Reservation",
+                "description": "Temporarily locking inventory when added to cart to prevent overselling."
+            },
+            {
+                "name": "Countdown Timers",
+                "description": "Synchronized server-side timers for sale events."
+            },
+            {
+                "name": "High-Traffic Queueing",
+                "description": "Waiting room system to manage spikes in traffic during product drops."
+            }
+        ],
+        "learning_outcomes": [
+            "Handling extreme traffic spikes",
+            "Real-time state synchronization",
+            "Preventing race conditions in inventory"
+        ],
+        "project_objectives": [
+            "Handle 10,000 concurrent users during a drop",
+            "Ensure absolutely zero overselling of limited items"
+        ]
+    },
+    {
+        "id": "eco_005",
+        "title": "E-Commerce Recommendation Engine",
+        "industry": "E-Commerce",
+        "client_name": "FashionForward",
+        "description": "A microservice that analyzes user browsing and purchase history to provide personalized product recommendations.",
+        "difficulty": "Medium",
+        "recommended_roles": [
+            "Data Engineer",
+            "Backend Developer"
+        ],
+        "technology_stack": [
+            "Python",
+            "FastAPI",
+            "Neo4j",
+            "Apache Spark"
+        ],
+        "duration_weeks": 5,
+        "modules": [
+            {
+                "name": "Event Tracking API",
+                "description": "Ingesting clicks, views, and purchases from the main storefront."
+            },
+            {
+                "name": "Collaborative Filtering",
+                "description": "Algorithm to recommend products based on similar users' behavior."
+            },
+            {
+                "name": "Content-Based Filtering",
+                "description": "Recommending products based on tags, categories, and descriptions."
+            },
+            {
+                "name": "A/B Testing Framework",
+                "description": "System to test different recommendation algorithms against each other."
+            }
+        ],
+        "learning_outcomes": [
+            "Building recommendation systems",
+            "Graph database basics",
+            "Handling high-throughput analytics pipelines"
+        ],
+        "project_objectives": [
+            "Increase average order value by 15%",
+            "Serve recommendations with <50ms latency"
+        ]
+    }
+]

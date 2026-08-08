@@ -1,0 +1,235 @@
+[
+    {
+        "id": "ft_001",
+        "title": "Digital Banking Platform",
+        "industry": "FinTech",
+        "client_name": "NeoBank Inc",
+        "description": "A modern core banking system for a digital-first bank. Supports account management, transactions, and interest calculations.",
+        "difficulty": "Hard",
+        "recommended_roles": [
+            "Backend Developer",
+            "Database Administrator",
+            "Security Engineer"
+        ],
+        "technology_stack": [
+            "Java Spring Boot",
+            "PostgreSQL",
+            "Kafka",
+            "Redis"
+        ],
+        "duration_weeks": 10,
+        "modules": [
+            {
+                "name": "Ledger System",
+                "description": "Immutable, append-only ledger for all financial transactions."
+            },
+            {
+                "name": "Account Management",
+                "description": "Creation and management of checking, savings, and credit accounts."
+            },
+            {
+                "name": "Payment Gateway",
+                "description": "Integration for ACH, Wire transfers, and domestic instant payments."
+            },
+            {
+                "name": "Fraud Detection",
+                "description": "Rule-based engine to flag suspicious transactions in real-time."
+            }
+        ],
+        "learning_outcomes": [
+            "Building distributed, highly consistent financial systems",
+            "Event-driven architecture with Kafka",
+            "Advanced database transaction management"
+        ],
+        "project_objectives": [
+            "Process 10,000 TPS (transactions per second)",
+            "Achieve PCI-DSS compliance requirements"
+        ]
+    },
+    {
+        "id": "ft_002",
+        "title": "Cryptocurrency Exchange",
+        "industry": "FinTech",
+        "client_name": "CoinTrade Pro",
+        "description": "A secure cryptocurrency trading platform featuring real-time order matching, wallet management, and market data websockets.",
+        "difficulty": "Hard",
+        "recommended_roles": [
+            "Backend Developer",
+            "Frontend Developer",
+            "DevOps Engineer"
+        ],
+        "technology_stack": [
+            "Go",
+            "React",
+            "PostgreSQL",
+            "RabbitMQ",
+            "Docker"
+        ],
+        "duration_weeks": 9,
+        "modules": [
+            {
+                "name": "Order Matching Engine",
+                "description": "High-performance engine to match buy and sell orders based on price and time."
+            },
+            {
+                "name": "Wallet Service",
+                "description": "Secure generation and management of crypto addresses and balances."
+            },
+            {
+                "name": "Market Data Feeds",
+                "description": "Real-time price tickers and order book updates via WebSockets."
+            },
+            {
+                "name": "KYC/AML Portal",
+                "description": "User verification flow integrating with identity verification APIs."
+            }
+        ],
+        "learning_outcomes": [
+            "High-performance algorithms (order book matching)",
+            "Cryptocurrency basics and security",
+            "Scaling WebSocket connections"
+        ],
+        "project_objectives": [
+            "Match orders with <5ms latency",
+            "Support 100,000 concurrent WebSocket connections"
+        ]
+    },
+    {
+        "id": "ft_003",
+        "title": "Automated Investment Advisor (Robo-Advisor)",
+        "industry": "FinTech",
+        "client_name": "WealthGenie",
+        "description": "A platform that automatically manages customer investment portfolios based on their risk profile and market conditions.",
+        "difficulty": "Medium",
+        "recommended_roles": [
+            "Backend Developer",
+            "Data Scientist"
+        ],
+        "technology_stack": [
+            "Python",
+            "FastAPI",
+            "Pandas",
+            "PostgreSQL"
+        ],
+        "duration_weeks": 6,
+        "modules": [
+            {
+                "name": "Risk Profiler",
+                "description": "Questionnaire and algorithm to determine user's risk tolerance."
+            },
+            {
+                "name": "Portfolio Rebalancing",
+                "description": "Automated buying/selling to maintain target asset allocations."
+            },
+            {
+                "name": "Market Data Ingestion",
+                "description": "Daily fetching of ETF and stock prices from financial APIs."
+            },
+            {
+                "name": "Performance Reporting",
+                "description": "Generating monthly statements and performance charts."
+            }
+        ],
+        "learning_outcomes": [
+            "Financial math and algorithms",
+            "Working with time-series data",
+            "API integrations for trading"
+        ],
+        "project_objectives": [
+            "Accurately track portfolio drift within 1%",
+            "Automate daily rebalancing trades securely"
+        ]
+    },
+    {
+        "id": "ft_004",
+        "title": "Peer-to-Peer Lending Platform",
+        "industry": "FinTech",
+        "client_name": "LendConnect",
+        "description": "A marketplace connecting borrowers with individual investors, including credit scoring and loan servicing features.",
+        "difficulty": "Medium",
+        "recommended_roles": [
+            "Full Stack Developer",
+            "Backend Developer"
+        ],
+        "technology_stack": [
+            "Ruby on Rails",
+            "React",
+            "PostgreSQL",
+            "Sidekiq"
+        ],
+        "duration_weeks": 7,
+        "modules": [
+            {
+                "name": "Credit Assessment",
+                "description": "Evaluating borrower risk using external credit bureau data."
+            },
+            {
+                "name": "Loan Marketplace",
+                "description": "Listing approved loans for investors to browse and fund."
+            },
+            {
+                "name": "Repayment Scheduler",
+                "description": "Calculating EMI schedules and processing monthly repayments."
+            },
+            {
+                "name": "Secondary Market",
+                "description": "Allowing investors to sell their loan parts to other investors."
+            }
+        ],
+        "learning_outcomes": [
+            "Complex financial scheduling",
+            "Handling marketplace payments and escrow",
+            "Background job processing"
+        ],
+        "project_objectives": [
+            "Automate monthly repayment collection and distribution",
+            "Ensure accurate interest accrual logic"
+        ]
+    },
+    {
+        "id": "ft_005",
+        "title": "Corporate Expense Management App",
+        "industry": "FinTech",
+        "client_name": "SpendSmart Corp",
+        "description": "A platform for companies to manage employee expenses, issue virtual cards, and automate receipt OCR processing.",
+        "difficulty": "Medium",
+        "recommended_roles": [
+            "Backend Developer",
+            "Frontend Developer"
+        ],
+        "technology_stack": [
+            "FastAPI",
+            "Vue.js",
+            "AWS Textract",
+            "PostgreSQL"
+        ],
+        "duration_weeks": 6,
+        "modules": [
+            {
+                "name": "Virtual Card Issuance",
+                "description": "Integration with card networks to generate virtual credit cards for employees."
+            },
+            {
+                "name": "Receipt OCR",
+                "description": "Using ML to automatically extract merchant, amount, and date from receipt images."
+            },
+            {
+                "name": "Approval Workflows",
+                "description": "Customizable multi-level approval chains based on expense amounts and departments."
+            },
+            {
+                "name": "Accounting Sync",
+                "description": "Exporting categorized expenses to Xero or QuickBooks."
+            }
+        ],
+        "learning_outcomes": [
+            "Integrating OCR/ML APIs",
+            "Workflow engine design",
+            "Third-party accounting software integration"
+        ],
+        "project_objectives": [
+            "Extract receipt data with 95% accuracy",
+            "Reduce expense approval time by 50%"
+        ]
+    }
+]
