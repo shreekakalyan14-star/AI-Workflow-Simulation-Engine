@@ -8,6 +8,7 @@ import StatusStrip from "./StatusStrip";
 import NotificationsBell from "./NotificationsBell";
 
 const TABS = [
+  { to: "/simulation", label: "Simulation" },
   { to: "/dashboard", label: "Dashboard" },
   { to: "/board", label: "Board" },
   { to: "/chat", label: "Chat" },

@@ -45,6 +45,7 @@ class Project(Base, UUIDPKMixin, TimestampMixin):
     project_state = relationship(
         "ProjectState", back_populates="project", uselist=False, cascade="all, delete-orphan"
     )
+    simulations = relationship("Simulation", back_populates="project", cascade="all, delete-orphan")
 
     __table_args__ = (
         Index("ix_projects_company_id", "company_id"),

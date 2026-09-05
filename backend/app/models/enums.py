@@ -196,6 +196,7 @@ class MessageSenderType(str, enum.Enum):
 
 class NotificationType(str, enum.Enum):
     TASK_ASSIGNED = "task_assigned"
+    TASK_STARTED = "task_started"
     TASK_SUBMITTED = "task_submitted"
     TASK_APPROVED = "task_approved"
     TASK_REJECTED = "task_rejected"
@@ -207,6 +208,12 @@ class NotificationType(str, enum.Enum):
     SPRINT_STARTED = "sprint_started"
     SPRINT_COMPLETED = "sprint_completed"
     PROJECT_COMPLETED = "project_completed"
+    SUBMISSION_RECEIVED = "submission_received"
+    REVIEW_STARTED = "review_started"
+    REVIEW_COMPLETED = "review_completed"
+    SUBMISSION_APPROVED = "submission_approved"
+    TASK_COMPLETED = "task_completed"
+    DEPENDENCY_BLOCKED = "dependency_blocked"
 
 
 # ==========================================================
@@ -225,6 +232,15 @@ class EventType(str, enum.Enum):
     SECURITY_AUDIT = "security_audit"
     DEADLINE_CHANGED = "deadline_changed"
     EMERGENCY_MEETING = "emergency_meeting"
+    TASK_STARTED = "task_started"
+    SUBMISSION_CREATED = "submission_created"
+    SUBMISSION_VERSION_CREATED = "submission_version_created"
+    REVIEW_STARTED = "review_started"
+    AI_REVIEW_COMPLETED = "ai_review_completed"
+    CHANGES_REQUESTED = "changes_requested"
+    SUBMISSION_RESUBMITTED = "submission_resubmitted"
+    MANAGER_APPROVED = "manager_approved"
+    TASK_COMPLETED = "task_completed"
 
 
 # ==========================================================
@@ -237,3 +253,53 @@ class MeetingType(str, enum.Enum):
     SPRINT_REVIEW = "sprint_review"
     RETROSPECTIVE = "retrospective"
     EMERGENCY = "emergency"
+
+
+# ==========================================================
+# SIMULATION
+# ==========================================================
+
+class SimulationStatus(str, enum.Enum):
+    NOT_STARTED = "not_started"
+    IN_PROGRESS = "in_progress"
+    COMPLETED = "completed"
+    ABANDONED = "abandoned"
+
+
+# ==========================================================
+# SCENARIO
+# ==========================================================
+
+class ScenarioStatus(str, enum.Enum):
+    PENDING = "pending"
+    ACTIVE = "active"
+    COMPLETED = "completed"
+    SKIPPED = "skipped"
+
+
+# ==========================================================
+# TASK TYPE
+# ==========================================================
+
+class TaskType(str, enum.Enum):
+    CODING = "coding"
+    DEBUGGING = "debugging"
+    DATABASE = "database"
+    API_DEVELOPMENT = "api_development"
+    REQUIREMENT_ANALYSIS = "requirement_analysis"
+    TESTING = "testing"
+    DESIGN = "design"
+    DOCUMENTATION = "documentation"
+    DECISION_MAKING = "decision_making"
+
+
+# ==========================================================
+# WORKFLOW EVENT
+# ==========================================================
+
+class WorkflowEventType(str, enum.Enum):
+    REQUIREMENT_CHANGE = "requirement_change"
+    DEADLINE_WARNING = "deadline_warning"
+    STAKEHOLDER_MESSAGE = "stakeholder_message"
+    BUG_REPORT = "bug_report"
+    PRIORITY_CHANGE = "priority_change"

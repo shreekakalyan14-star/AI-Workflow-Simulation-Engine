@@ -7,6 +7,7 @@ Phase 3: AI Project Manager + AI Teammates chat, WebSockets, Dynamic
 Events Engine, Stateful Workflow rules, Meetings, Notifications,
 Activity Log, Timeline, and a real APScheduler background job.
 """
+import logging
 from contextlib import asynccontextmanager
 
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
@@ -15,10 +16,18 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.routes import (
     activity, chat, companies, dev_auth, events, generate, meetings,
-    notifications, projects, reviews, sprints, submissions, tasks, team, timeline, ws,
+    notifications, projects, reviews, simulation, sprints, submissions, tasks, team, timeline, ws,
 )
 from app.core.config import settings
+from app.core.exceptions import register_exception_handlers
 from app.services.scheduler_jobs import check_high_stress_projects
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+)
+logger = logging.getLogger(__name__)
 
 scheduler = AsyncIOScheduler()
 
@@ -27,8 +36,10 @@ scheduler = AsyncIOScheduler()
 async def lifespan(app: FastAPI):
     scheduler.add_job(check_high_stress_projects, "interval", seconds=60, id="high_stress_checkin")
     scheduler.start()
+    logger.info("Application startup complete")
     yield
     scheduler.shutdown(wait=False)
+    logger.info("Application shutdown complete")
 
 
 app = FastAPI(
@@ -53,12 +64,16 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Register exception handlers
+register_exception_handlers(app)
+
 app.include_router(dev_auth.router)
 app.include_router(generate.router)
 app.include_router(companies.router)
 app.include_router(projects.router)
 app.include_router(sprints.router)
 app.include_router(tasks.router)
+app.include_router(simulation.router)
 app.include_router(chat.router)
 app.include_router(team.router)
 app.include_router(notifications.router)

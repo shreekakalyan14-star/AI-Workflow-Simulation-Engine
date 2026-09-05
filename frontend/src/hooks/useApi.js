@@ -51,10 +51,13 @@ export function useSprints(projectId) {
   });
 }
 
-export function useBoard(projectId) {
+export function useBoard(projectId, simulationId) {
   return useQuery({
-    queryKey: ["board", projectId],
-    queryFn: async () => (await apiClient.get(`/api/projects/${projectId}/board`)).data,
+    queryKey: ["board", projectId, simulationId],
+    queryFn: async () => {
+      const params = simulationId ? `?simulation_id=${simulationId}` : "";
+      return (await apiClient.get(`/api/projects/${projectId}/board${params}`)).data;
+    },
     enabled: Boolean(projectId),
     refetchInterval: 8000,
   });

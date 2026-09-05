@@ -13,6 +13,8 @@ export default function TaskDetailDrawer({ task, allTasks, onClose, onUpdateStat
 
   if (!task) return null;
 
+  const isLocked = task.locked === true;
+
   const dependencies = (task.depends_on_task_ids || [])
     .map((id) => allTasks.find((t) => t.id === id))
     .filter(Boolean);
@@ -88,27 +90,35 @@ export default function TaskDetailDrawer({ task, allTasks, onClose, onUpdateStat
         )}
 
         <Section title="Actions">
+          {isLocked && (
+            <p className="mb-3 text-xs text-text-faint flex items-center gap-1.5">
+              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+              This task is locked. Complete the current task first.
+            </p>
+          )}
           <div className="flex flex-wrap gap-2">
             <ActionButton
-              disabled={isUpdating || task.status === "in_progress" || dependenciesIncomplete}
+              disabled={isLocked || isUpdating || task.status === "in_progress" || task.status === "completed" || dependenciesIncomplete}
               onClick={() => act("in_progress")}
             >
               Start
             </ActionButton>
             <ActionButton
-              disabled={isUpdating || task.status !== "in_progress"}
+              disabled={isLocked || isUpdating || task.status !== "in_progress"}
               onClick={() => act("todo")}
             >
               Pause
             </ActionButton>
             <ActionButton
-              disabled={isUpdating || task.status === "completed"}
-              onClick={() => act("review")}
+              disabled={isLocked || isUpdating || task.status !== "in_progress"}
+              onClick={() => act("submitted")}
             >
-              Send to review
+              Submit for review
             </ActionButton>
             <ActionButton
-              disabled={isUpdating || task.status === "completed"}
+              disabled={isLocked || isUpdating || !["submitted", "under_review", "manager_approval"].includes(task.status)}
               onClick={() => act("completed", deliverableUrl ? { deliverable_url: deliverableUrl } : {})}
               accent="var(--color-status-completed)"
             >
@@ -144,7 +154,7 @@ export default function TaskDetailDrawer({ task, allTasks, onClose, onUpdateStat
             />
             <button
               className="btn-ghost shrink-0"
-              disabled={isUpdating || !blockedReason}
+              disabled={isUpdating || !blockedReason || task.status !== "in_progress"}
               onClick={() => act("blocked", { blocked_reason: blockedReason })}
             >
               Mark blocked

@@ -12,6 +12,7 @@ class TaskRead(BaseModel):
 
     id: uuid.UUID
     sprint_id: uuid.UUID
+    sequence: int = 0
     title: str
     description: str
     acceptance_criteria: List[str]

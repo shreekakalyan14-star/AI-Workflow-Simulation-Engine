@@ -1,6 +1,6 @@
 import uuid
 from datetime import datetime, timezone
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import select
@@ -16,6 +16,13 @@ from app.models.sprint import Sprint
 from app.models.task import Task, TaskDependency
 from app.schemas.task import TaskRead, TaskStatusUpdate
 from app.services.engines import workflow_engine
+from app.services.engines.task_state_machine import (
+    InvalidTransitionError,
+    can_start_task,
+    get_transition_action,
+    validate_transition,
+)
+from app.services.activity_log_service import log_activity
 from app.websockets.manager import manager as ws_manager
 from pydantic import BaseModel, Field
 
@@ -42,6 +49,36 @@ def _get_owned_task(
     return task
 
 
+def _get_company_id_for_task(task: Task, db: Session) -> uuid.UUID:
+    sprint = db.get(Sprint, task.sprint_id)
+    project = db.get(Project, sprint.project_id)
+    return project.company_id
+
+
+def _check_dependencies(db: Session, task: Task) -> None:
+    """Check if all dependencies are completed. Raise HTTPException if blocked."""
+    dep_stmt = select(TaskDependency.depends_on_task_id).where(TaskDependency.task_id == task.id)
+    dep_ids = db.execute(dep_stmt).scalars().all()
+    if not dep_ids:
+        return
+
+    incomplete = db.execute(
+        select(Task.id, Task.title).where(
+            Task.id.in_(dep_ids), Task.status != TaskStatus.COMPLETED
+        )
+    ).all()
+
+    if incomplete:
+        dep_details = [f"'{title}' (id: {tid})" for tid, title in incomplete]
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail=(
+                f"Cannot start task: the following dependencies are not completed: "
+                f"{', '.join(dep_details)}"
+            ),
+        )
+
+
 def _to_task_read(task: Task, db: Session) -> TaskRead:
     dep_stmt = select(TaskDependency.depends_on_task_id).where(TaskDependency.task_id == task.id)
     dep_ids = db.execute(dep_stmt).scalars().all()
@@ -60,13 +97,16 @@ def get_task(
     return _to_task_read(task, db)
 
 
-@router.get("/api/projects/{project_id}/board", response_model=Dict[str, List[TaskRead]])
+@router.get("/api/projects/{project_id}/board", response_model=Dict[str, List[dict]])
 def get_kanban_board(
     project_id: uuid.UUID,
+    simulation_id: Optional[uuid.UUID] = None,
     db: Session = Depends(get_db),
     user: CurrentUser = Depends(get_current_user),
 ):
-    """Every task for the project, grouped by status — feeds the Kanban board columns directly."""
+    """Every task for the project, grouped by status — feeds the Kanban board columns directly.
+    When simulation_id is provided, includes lock status per task.
+    """
     project = db.get(Project, project_id)
     if project is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Project not found")
@@ -78,12 +118,33 @@ def get_kanban_board(
         select(Task)
         .join(Sprint, Sprint.id == Task.sprint_id)
         .where(Sprint.project_id == project_id)
+        .order_by(Task.sequence)
     )
     tasks = db.execute(stmt).scalars().all()
 
-    board: Dict[str, List[TaskRead]] = {s.value: [] for s in TaskStatus}
+    # Build lock map from task path if simulation_id provided
+    lock_map: dict[uuid.UUID, bool] = {}
+    if simulation_id is not None:
+        from app.models.simulation import Simulation
+        from app.models.task_path import SimulationTaskPath
+
+        simulation = db.get(Simulation, simulation_id)
+        if simulation:
+            current_task_id = simulation.current_task_id
+            for task in tasks:
+                if task.status == TaskStatus.COMPLETED:
+                    lock_map[task.id] = False
+                elif task.id == current_task_id:
+                    lock_map[task.id] = False
+                else:
+                    lock_map[task.id] = True
+
+    board: Dict[str, List[dict]] = {s.value: [] for s in TaskStatus}
     for task in tasks:
-        board[task.status.value].append(_to_task_read(task, db))
+        task_data = _to_task_read(task, db).model_dump()
+        if lock_map:
+            task_data["locked"] = lock_map.get(task.id, True)
+        board[task.status.value].append(task_data)
     return board
 
 
@@ -95,25 +156,61 @@ async def update_task_status(
     user: CurrentUser = Depends(get_current_user),
 ):
     """
-    Drives both the Kanban drag-and-drop (FEATURE 4) and task actions —
-    start/pause/complete/block (FEATURE 5). Every transition persists,
-    updates the project's live state counters, runs the stateful workflow
-    rules (FEATURE 8), and broadcasts the change over WebSocket (FEATURE 17).
+    Drives task lifecycle with strict state machine validation.
+    Every transition is validated, persisted, and logged.
     """
     task = _get_owned_task(task_id, db, user)
+    company_id = _get_company_id_for_task(task, db)
 
-    if payload.status == TaskStatus.IN_PROGRESS and task.status == TaskStatus.BACKLOG:
-        dep_stmt = select(TaskDependency.depends_on_task_id).where(TaskDependency.task_id == task.id)
-        dep_ids = db.execute(dep_stmt).scalars().all()
-        if dep_ids:
-            incomplete = db.execute(
-                select(Task.id).where(Task.id.in_(dep_ids), Task.status != TaskStatus.COMPLETED)
-            ).scalars().all()
-            if incomplete:
-                raise HTTPException(
-                    status_code=status.HTTP_409_CONFLICT,
-                    detail="Cannot start: one or more dependencies are not completed yet.",
-                )
+    # Check dependencies FIRST for transitions that start work (IN_PROGRESS)
+    # This ensures dependency errors (409) take precedence over transition errors (400)
+    if payload.status == TaskStatus.IN_PROGRESS:
+        _check_dependencies(db, task)
+
+    # Validate state machine transition
+    try:
+        validate_transition(task.status, payload.status)
+    except InvalidTransitionError as e:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
+
+    # Additional business rules
+    if payload.status == TaskStatus.IN_PROGRESS:
+        # Can only start from TODO or BACKLOG
+        if not can_start_task(task.status):
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Cannot start task from '{task.status.value}'. Must be in TODO or BACKLOG.",
+            )
+
+    if payload.status == TaskStatus.SUBMITTED:
+        # Can only submit from IN_PROGRESS
+        if task.status != TaskStatus.IN_PROGRESS:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Cannot submit task from '{task.status.value}'. Must be IN_PROGRESS.",
+            )
+        # Require deliverable URL for submission
+        if not payload.deliverable_url and not task.deliverable_url:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Cannot submit task without a deliverable URL.",
+            )
+
+    if payload.status == TaskStatus.COMPLETED:
+        # Can only complete from MANAGER_APPROVAL
+        if task.status != TaskStatus.MANAGER_APPROVAL:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Cannot complete task from '{task.status.value}'. Must be MANAGER_APPROVAL after review.",
+            )
+
+    if payload.status == TaskStatus.UNDER_REVIEW:
+        # Can move to UNDER_REVIEW from SUBMITTED (manual review assignment)
+        if task.status != TaskStatus.SUBMITTED:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Cannot move to UNDER_REVIEW from '{task.status.value}'. Must be SUBMITTED.",
+            )
 
     previous_status = task.status
     task.status = payload.status
@@ -139,8 +236,33 @@ async def update_task_status(
 
     _sync_project_state(db, task, previous_status, payload.status)
 
+    # Log activity
+    action = get_transition_action(previous_status, payload.status)
+    log_activity(
+        db,
+        company_id=company_id,
+        actor=user.student_id,
+        action=action,
+        detail=f"Task '{task.title}' moved from {previous_status.value} to {payload.status.value}",
+        task_id=str(task.id),
+        previous_status=previous_status.value,
+        new_status=payload.status.value,
+    )
+
     db.commit()
     db.refresh(task)
+
+    # Trigger TASK_COMPLETED event if task was completed
+    if payload.status == TaskStatus.COMPLETED:
+        from app.services.engines.events_engine import trigger_event
+        from app.models.enums import EventType
+        await trigger_event(
+            db,
+            project,
+            EventType.TASK_COMPLETED,
+            f"Task '{task.title}' completed",
+            {"task_id": str(task.id), "task_title": task.title},
+        )
 
     if state is not None:
         await workflow_engine.evaluate_after_task_transition(
@@ -176,6 +298,16 @@ async def report_bug(
     ).scalar_one_or_none()
     if state is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Project state not found")
+
+    company_id = _get_company_id_for_task(task, db)
+    log_activity(
+        db,
+        company_id=company_id,
+        actor=user.student_id,
+        action="bug_reported",
+        detail=f"Bug reported on task '{task.title}': {payload.description}",
+        task_id=str(task.id),
+    )
 
     await workflow_engine.report_bug(db, project, state, f"Bug on '{task.title}': {payload.description}")
 

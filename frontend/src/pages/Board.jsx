@@ -2,14 +2,14 @@ import { useMemo, useState } from "react";
 import { DndContext, PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
 import { useSimulation } from "../context/SimulationContext";
 import { useBoard, useUpdateTaskStatus } from "../hooks/useApi";
-import { STATUS_ORDER, STATUS_META } from "../lib/status";
+import { STATUS_ORDER, STATUS_META, VALID_TRANSITIONS } from "../lib/status";
 import Column from "../components/Column";
 import TaskDetailDrawer from "../components/TaskDetailDrawer";
 import LoadingScreen from "../components/LoadingScreen";
 
 export default function Board() {
   const { simulation } = useSimulation();
-  const { data: board, isLoading, error } = useBoard(simulation?.projectId);
+  const { data: board, isLoading, error } = useBoard(simulation?.projectId, simulation?.id);
   const updateStatus = useUpdateTaskStatus(simulation?.projectId);
   const [selectedTask, setSelectedTask] = useState(null);
   const [banner, setBanner] = useState(null);
@@ -32,6 +32,19 @@ export default function Board() {
     const task = active.data.current?.task;
     const newStatus = over.id;
     if (!task || task.status === newStatus) return;
+
+    if (task.locked) {
+      setBanner("This task is locked and cannot be moved.");
+      setTimeout(() => setBanner(null), 4000);
+      return;
+    }
+
+    const allowed = VALID_TRANSITIONS[task.status];
+    if (!allowed || !allowed.includes(newStatus)) {
+      setBanner(`Cannot move from '${task.status}' to '${newStatus}'. Allowed: ${allowed ? allowed.join(", ") : "none"}`);
+      setTimeout(() => setBanner(null), 4000);
+      return;
+    }
 
     try {
       await updateStatus.mutateAsync({ taskId: task.id, status: newStatus });

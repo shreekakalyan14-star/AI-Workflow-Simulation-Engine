@@ -10,3 +10,6 @@ from app.models.event import Event  # noqa: F401
 from app.models.activity_log import ActivityLog  # noqa: F401
 from app.models.project_state import ProjectState  # noqa: F401
 from app.models.meeting import MeetingSchedule, SprintReview  # noqa: F401
+from app.models.submission import Submission, SubmissionVersion, AIReview, ReviewHistory  # noqa: F401
+from app.models.simulation import Simulation, Scenario, ScenarioTask, WorkflowEvent  # noqa: F401
+from app.models.task_path import SimulationTaskPath  # noqa: F401

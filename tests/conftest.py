@@ -20,7 +20,9 @@ def _setup_database():
     """Create a clean schema once per test session against a real Postgres DB."""
     Base.metadata.create_all(bind=app_engine)
     yield
-    Base.metadata.drop_all(bind=app_engine)
+    with app_engine.begin() as conn:
+        for table in reversed(Base.metadata.sorted_tables):
+            conn.execute(text(f'DROP TABLE IF EXISTS {table.name} CASCADE'))
 
 
 @pytest.fixture

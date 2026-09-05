@@ -28,7 +28,7 @@ class Sprint(Base, UUIDPKMixin, TimestampMixin):
     end_date: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
 
     project = relationship("Project", back_populates="sprints")
-    tasks = relationship("Task", back_populates="sprint", cascade="all, delete-orphan")
+    tasks = relationship("Task", back_populates="sprint", cascade="all, delete-orphan", order_by="Task.sequence")
     sprint_review = relationship(
         "SprintReview", back_populates="sprint", uselist=False, cascade="all, delete-orphan"
     )

@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState, useCallback } from "react";
-import { apiClient, setAuthToken } from "../api/client";
+import { apiClient, setAuthFailureHandler, setAuthToken } from "../api/client";
 
 const AuthContext = createContext(null);
 
@@ -18,6 +18,22 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     setAuthToken(auth?.token || null);
   }, [auth]);
+
+  useEffect(() => {
+    setAuthFailureHandler((error) => {
+      if (error?.response?.status !== 401) {
+        return;
+      }
+
+      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem("aiwse:simulation");
+      setAuth(null);
+    });
+
+    return () => {
+      setAuthFailureHandler(null);
+    };
+  }, []);
 
   const login = useCallback(async (studentId) => {
     const res = await apiClient.post("/api/dev/token", { student_id: studentId, role: "student" });

@@ -42,6 +42,7 @@ export default function Onboarding() {
   const [studentId, setStudentId] = useState(auth?.studentId || "student_001");
   const [signInError, setSignInError] = useState(null);
   const [signingIn, setSigningIn] = useState(false);
+  const [sessionError, setSessionError] = useState(null);
 
   const [role, setRole] = useState("Backend Developer");
   const [stackInput, setStackInput] = useState("Python, FastAPI, PostgreSQL");
@@ -53,6 +54,7 @@ export default function Onboarding() {
   const handleSignIn = async (e) => {
     e.preventDefault();
     setSignInError(null);
+    setSessionError(null);
     setSigningIn(true);
     try {
       await login(studentId.trim());
@@ -65,21 +67,31 @@ export default function Onboarding() {
 
   const handleGenerate = async (e) => {
     e.preventDefault();
+    setSessionError(null);
+
     const technology_stack = stackInput
       .split(",")
       .map((s) => s.trim())
       .filter(Boolean);
 
-    const result = await generateMutation.mutateAsync({
-      student_id: auth.studentId,
-      role,
-      technology_stack,
-      difficulty,
-      company_type: companyType,
-    });
+    try {
+      const result = await generateMutation.mutateAsync({
+        student_id: auth.studentId,
+        role,
+        technology_stack,
+        difficulty,
+        company_type: companyType,
+      });
 
-    setSimulation({ companyId: result.company_id, projectId: result.project_id });
-    navigate("/dashboard");
+      setSimulation({ companyId: result.company_id, projectId: result.project_id });
+      navigate("/dashboard");
+    } catch (err) {
+      if (err.message.includes("Invalid or expired token")) {
+        setSessionError("Your session expired. Sign in again to mint a fresh dev token.");
+        return;
+      }
+      throw err;
+    }
   };
 
   if (generateMutation.isPending) {
@@ -98,7 +110,7 @@ export default function Onboarding() {
         </h1>
         <p className="mt-1 text-sm text-text-muted">
           Start an internship: pick a role, a stack, a difficulty, and a
-          company type — the engine builds the rest.
+          company type - the engine builds the rest.
         </p>
 
         {!auth?.token ? (
@@ -113,9 +125,10 @@ export default function Onboarding() {
               />
             </Field>
             <p className="text-xs text-text-faint">
-              Dev-only sign-in — mints a test token locally. Module 1 issues
+              Dev-only sign-in - mints a test token locally. Module 1 issues
               real tokens once this is integrated into the full platform.
             </p>
+            {sessionError && <p className="text-xs text-status-blocked">{sessionError}</p>}
             {signInError && <p className="text-xs text-status-blocked">{signInError}</p>}
             <button type="submit" className="btn-primary" disabled={signingIn}>
               {signingIn ? "Signing in..." : "Sign in"}
@@ -177,7 +190,7 @@ export default function Onboarding() {
               </Field>
             </div>
 
-            {generateMutation.isError && (
+            {generateMutation.isError && !sessionError && (
               <p className="text-xs text-status-blocked">{generateMutation.error.message}</p>
             )}
 

@@ -26,6 +26,7 @@ class Company(Base, UUIDPKMixin, TimestampMixin):
     manager = relationship("Manager", back_populates="company", uselist=False, cascade="all, delete-orphan")
     projects = relationship("Project", back_populates="company", cascade="all, delete-orphan")
     team_members = relationship("TeamMember", back_populates="company", cascade="all, delete-orphan")
+    simulations = relationship("Simulation", back_populates="company", cascade="all, delete-orphan")
 
     __table_args__ = (
         Index("ix_companies_student_id", "student_id"),

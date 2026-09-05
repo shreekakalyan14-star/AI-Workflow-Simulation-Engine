@@ -25,6 +25,9 @@ import httpx
 from app.core.config import settings
 
 
+_MOCK_AI_SERVICE: Optional["MockAIService"] = None
+
+
 class AIService(ABC):
     @abstractmethod
     async def generate_text(self, prompt: str, system_prompt: Optional[str] = None) -> str:
@@ -48,6 +51,9 @@ class MockAIService(AIService):
     GEMINI_API_KEY is empty, so the whole engine is fully runnable with zero
     external dependencies or API keys.
     """
+
+    def __init__(self) -> None:
+        self._technical_review_calls = 0
 
     _MISSION_TEMPLATES = [
         "To {verb} {domain} through relentless focus on {value}.",
@@ -142,11 +148,82 @@ class MockAIService(AIService):
     async def generate_json(
         self, prompt: str, system_prompt: Optional[str] = None
     ) -> Dict[str, Any]:
-        # The mock provider is only used for free-text flavor fields in this
-        # phase; structured generation (project objectives/modules/etc.) is
-        # handled by the template-based generators directly for reliability.
-        text = await self.generate_text(prompt, system_prompt)
-        return {"text": text}
+        # For mock provider, use the prompt context to return the correct
+        # structured payload for either technical review or manager review.
+        if "Provide your final manager review decision as JSON" in prompt or "You are reviewing an AI code review" in (system_prompt or ""):
+            return self._generate_mock_manager_review()
+        return self._generate_mock_review()
+
+    def _generate_mock_review(self) -> Dict[str, Any]:
+        """Generate a deterministic mock review response for submission workflows."""
+        self._technical_review_calls += 1
+        result = "changes_required" if self._technical_review_calls == 1 else "approved"
+        
+        return {
+            "result": result,
+            "score": 82,
+            "severity": "warning",
+            "summary": "The submission implements the required functionality with good code structure. Tests are included and pass.",
+            "strengths": [
+                "Clean code organization",
+                "Proper error handling",
+                "Good test coverage"
+            ],
+            "issues": [
+                "Missing docstrings in some functions",
+                "Could add more edge case tests"
+            ],
+            "risks": [
+                "Potential performance bottlenecks under load",
+                "Limited error handling for edge cases"
+            ],
+            "required_changes": [
+                "Add docstrings to public functions",
+                "Add tests for edge cases"
+            ],
+            "acceptance_criteria": [
+                {
+                    "criterion": "Implementation meets functional requirements",
+                    "met": True,
+                    "evidence": "Code implements all required functions"
+                },
+                {
+                    "criterion": "Automated tests are included and passing",
+                    "met": True,
+                    "evidence": "Test file present with passing tests"
+                },
+                {
+                    "criterion": "Code follows project architecture and review standards",
+                    "met": True,
+                    "evidence": "Code structure matches project conventions"
+                }
+            ],
+            "code_quality": {
+                "score": 85,
+                "feedback": "Well-structured code with good separation of concerns"
+            },
+            "testing": {
+                "score": 80,
+                "feedback": "Tests cover main functionality, could add edge cases"
+            },
+            "security": {
+                "score": 90,
+                "feedback": "No security issues found"
+            },
+            "performance": {
+                "score": 85,
+                "feedback": "Efficient implementation"
+            }
+        }
+
+    def _generate_mock_manager_review(self) -> Dict[str, Any]:
+        """Generate a deterministic mock manager review response."""
+        return {
+            "decision": "approved",
+            "severity": "info",
+            "summary": "Manager review confirms the AI assessment. The submission meets requirements.",
+            "feedback": "Good work on the implementation. The code is clean and well-tested. Continue following the project standards."
+        }
 
     @staticmethod
     def _extract_domain(prompt: str) -> str:
@@ -203,4 +280,8 @@ class GeminiAIService(AIService):
 def get_ai_service() -> AIService:
     if settings.GEMINI_API_KEY:
         return GeminiAIService(api_key=settings.GEMINI_API_KEY, model=settings.GEMINI_MODEL)
-    return MockAIService()
+
+    global _MOCK_AI_SERVICE
+    if _MOCK_AI_SERVICE is None:
+        _MOCK_AI_SERVICE = MockAIService()
+    return _MOCK_AI_SERVICE

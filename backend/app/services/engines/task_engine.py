@@ -8,6 +8,7 @@ persists everything with db.flush() (caller commits).
 from __future__ import annotations
 
 import random
+import uuid
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from typing import Final, Sequence
@@ -15,7 +16,7 @@ from typing import Final, Sequence
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.models.enums import DifficultyLevel, SprintStatus, TaskPriority, TaskStatus
+from app.models.enums import DifficultyLevel, SprintStatus, TaskPriority, TaskStatus, TaskType
 from app.models.project import Project
 from app.models.sprint import Sprint
 from app.models.task import Task, TaskDependency
@@ -53,6 +54,43 @@ _DEFAULT_VERBS: Final[tuple[str, ...]] = (
     "Document",
 )
 
+# Map verb keywords to TaskType for deterministic classification
+_VERB_TO_TASK_TYPE: Final[dict[str, TaskType]] = {
+    "test": TaskType.TESTING,
+    "design": TaskType.DESIGN,
+    "document": TaskType.DOCUMENTATION,
+    "audit": TaskType.REQUIREMENT_ANALYSIS,
+    "harden": TaskType.REQUIREMENT_ANALYSIS,
+    "scan": TaskType.REQUIREMENT_ANALYSIS,
+    "train": TaskType.DECISION_MAKING,
+    "evaluate": TaskType.DECISION_MAKING,
+    "validate": TaskType.TESTING,
+    "setup": TaskType.DOCUMENTATION,
+    "configure": TaskType.DOCUMENTATION,
+    "provision": TaskType.DOCUMENTATION,
+    "containerize": TaskType.DOCUMENTATION,
+    "monitor": TaskType.DOCUMENTATION,
+}
+
+# Map technology keywords to TaskType for technology-based fallback classification
+_TECH_TO_TASK_TYPE: Final[dict[str, TaskType]] = {
+    "database": TaskType.DATABASE,
+    "sql": TaskType.DATABASE,
+    "postgresql": TaskType.DATABASE,
+    "mysql": TaskType.DATABASE,
+    "api": TaskType.API_DEVELOPMENT,
+    "fastapi": TaskType.API_DEVELOPMENT,
+    "flask": TaskType.API_DEVELOPMENT,
+    "express": TaskType.API_DEVELOPMENT,
+    "graphql": TaskType.API_DEVELOPMENT,
+    "react": TaskType.DESIGN,
+    "vue": TaskType.DESIGN,
+    "angular": TaskType.DESIGN,
+    "html": TaskType.DESIGN,
+    "css": TaskType.DESIGN,
+    "ui": TaskType.DESIGN,
+}
+
 _FALLBACK_MODULES: Final[tuple[str, ...]] = (
     "Foundation Setup",
     "Core Functionality",
@@ -84,6 +122,7 @@ def generate_tasks_for_project(
     Read the project module backlog, generate tasks across sprints, and persist them.
 
     Story points are stored in ``Task.estimated_hours`` using Fibonacci-scale values.
+    Tasks are assigned deterministic sequence numbers within each sprint for ordering.
     """
     if not role.strip():
         raise TaskEngineError("role must be a non-empty string")
@@ -100,6 +139,9 @@ def generate_tasks_for_project(
         sprints = _resolve_sprints(db, project)
         plans = _build_module_plans(sprints, backlog, difficulty, rng)
 
+        # Track sequence counters per sprint for deterministic ordering
+        sprint_sequence: dict[uuid.UUID, int] = {s.id: 0 for s in sprints}
+
         tasks: list[Task] = []
         for plan in plans:
             module_tasks = _create_module_tasks(
@@ -109,7 +151,10 @@ def generate_tasks_for_project(
                 technology_stack=technology_stack,
                 difficulty=difficulty,
                 rng=rng,
+                sequence_start=sprint_sequence[plan.sprint.id],
             )
+            # Update sequence counter for this sprint
+            sprint_sequence[plan.sprint.id] += len(module_tasks)
             _assign_module_dependencies(db, module_tasks)
             tasks.extend(module_tasks)
 
@@ -197,6 +242,21 @@ def _verbs_for_role(role: str) -> tuple[str, ...]:
     return _DEFAULT_VERBS
 
 
+def _classify_task_type(verb: str, technology_stack: Sequence[str]) -> TaskType:
+    """Classify task type deterministically based on the verb and technology stack."""
+    verb_lower = verb.lower()
+    for keyword, task_type in _VERB_TO_TASK_TYPE.items():
+        if keyword in verb_lower:
+            return task_type
+    # Fallback: check technology stack
+    for tech in technology_stack:
+        tech_lower = tech.lower()
+        for keyword, task_type in _TECH_TO_TASK_TYPE.items():
+            if keyword in tech_lower:
+                return task_type
+    return TaskType.CODING
+
+
 def _create_module_tasks(
     db: Session,
     plan: _ModuleTaskPlan,
@@ -204,6 +264,7 @@ def _create_module_tasks(
     technology_stack: Sequence[str],
     difficulty: DifficultyLevel,
     rng: random.Random,
+    sequence_start: int = 0,
 ) -> list[Task]:
     verbs = _verbs_for_role(role)
     stack_label = ", ".join(technology_stack)
@@ -212,8 +273,10 @@ def _create_module_tasks(
 
     for index in range(plan.task_count):
         verb = rng.choice(verbs)
+        task_type = _classify_task_type(verb, technology_stack)
         task = Task(
             sprint_id=plan.sprint.id,
+            sequence=sequence_start + index,
             title=f"{verb} {plan.module}",
             description=(
                 f"Implement work for the '{plan.module}' module.\n"
@@ -228,6 +291,8 @@ def _create_module_tasks(
             ],
             priority=_assign_priority(index, plan.sprint.sprint_number, rng),
             status=TaskStatus.BACKLOG,
+            task_type=task_type,
+            difficulty=difficulty,
             estimated_hours=float(rng.choice(story_points)),
             deadline=_assign_deadline(plan.sprint, rng),
         )

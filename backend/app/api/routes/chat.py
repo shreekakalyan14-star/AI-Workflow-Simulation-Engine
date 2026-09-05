@@ -24,7 +24,7 @@ from app.core.database import get_db
 from app.core.security import CurrentUser, get_current_user
 
 from app.models.company import Company
-from app.models.enums import MessageSenderType
+from app.models.enums import MessageSenderType, TaskStatus
 from app.models.manager import Manager
 from app.models.message import Message
 from app.models.project import Project
@@ -197,7 +197,44 @@ async def send_team_message(
     db.add(student_msg)
     db.flush()
 
-    reply_text = await generate_teammate_reply(ai_service, teammate, project, history, payload.content)
+    # Get current sprint, task, state, and blockers for context
+    from app.models.project_state import ProjectState
+    from app.models.sprint import Sprint
+    from app.models.task import Task
+    
+    state = db.execute(select(ProjectState).where(ProjectState.project_id == project.id)).scalar_one_or_none()
+    sprint = None
+    task = None
+    blockers = []
+    
+    # Find current task if mentioned or from project state
+    if state and state.current_sprint_number:
+        sprint = db.execute(
+            select(Sprint).where(Sprint.project_id == project.id, Sprint.sprint_number == state.current_sprint_number)
+        ).scalar_one_or_none()
+    
+    # Try to find task from message content or current work
+    if sprint:
+        task = db.execute(
+            select(Task)
+            .join(Sprint, Sprint.id == Task.sprint_id)
+            .where(Sprint.project_id == project.id, Task.status.in_([TaskStatus.IN_PROGRESS, TaskStatus.UNDER_REVIEW]))
+        ).scalars().first()
+    
+    if task:
+        blockers = [task.blocked_reason] if task.blocked_reason else []
+    
+    reply_text = await generate_teammate_reply(
+        ai_service=ai_service,
+        teammate=teammate,
+        project=project,
+        history=history,
+        student_message=payload.content,
+        sprint=sprint,
+        task=task,
+        state=state,
+        blockers=blockers,
+    )
 
     reply_msg = Message(
         company_id=company_id, sender_type=MessageSenderType.TEAM_MEMBER,

@@ -20,9 +20,10 @@ def test_meetings_generated_for_every_sprint(client, auth_headers):
     resp = client.get(f"/api/projects/{data['project_id']}/meetings", headers=auth_headers)
     assert resp.status_code == 200
     meetings = resp.json()
-    # 4 sprints * (planning + review) = 8
-    assert len(meetings) == 8
-    assert {m["meeting_type"] for m in meetings} == {"sprint_planning", "sprint_review"}
+    # 4 sprints * (5 daily standups + planning + review + retrospective) = 32
+    assert len(meetings) == 32
+    meeting_types = {m["meeting_type"] for m in meetings}
+    assert meeting_types == {"sprint_planning", "daily_standup", "sprint_review", "retrospective"}
 
 
 def test_manager_chat_replies_and_persists_history(client, auth_headers):

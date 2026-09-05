@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import Board from "./pages/Board";
 import Chat from "./pages/Chat";
 import Timeline from "./pages/Timeline";
+import SimulationWorkspace from "./pages/SimulationWorkspace";
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
         <Route path="/board" element={<Board />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/timeline" element={<Timeline />} />
+        <Route path="/simulation" element={<SimulationWorkspace />} />
       </Route>
     </Routes>
   );

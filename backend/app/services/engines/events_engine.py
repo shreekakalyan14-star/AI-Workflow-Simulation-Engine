@@ -17,6 +17,15 @@ from app.websockets.manager import manager as ws_manager
 _EVENT_NOTIFICATION_TYPE = {
     EventType.DEADLINE_CHANGED: NotificationType.DEADLINE_UPDATED,
     EventType.BUG_REPORT: NotificationType.BUG_REPORTED,
+    EventType.TASK_STARTED: NotificationType.TASK_STARTED,
+    EventType.SUBMISSION_CREATED: NotificationType.SUBMISSION_RECEIVED,
+    EventType.SUBMISSION_VERSION_CREATED: NotificationType.SUBMISSION_RECEIVED,
+    EventType.REVIEW_STARTED: NotificationType.REVIEW_STARTED,
+    EventType.AI_REVIEW_COMPLETED: NotificationType.REVIEW_COMPLETED,
+    EventType.CHANGES_REQUESTED: NotificationType.CHANGES_REQUESTED,
+    EventType.SUBMISSION_RESUBMITTED: NotificationType.SUBMISSION_RECEIVED,
+    EventType.MANAGER_APPROVED: NotificationType.SUBMISSION_APPROVED,
+    EventType.TASK_COMPLETED: NotificationType.TASK_COMPLETED,
 }
 
 
